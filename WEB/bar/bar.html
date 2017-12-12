@@ -1,0 +1,338 @@
+<nav class="navbar" role="navigation" style="z-index: 900;">
+    <div class="navbar-header">
+        <img class="dsb-logo" src="">
+    </div>
+    <div>
+        <ul class="nav navbar-nav navbar-fixed-top">
+            <li>
+                <a href="#" class="logo">
+                    <img src="/img/login/logo.png" style="vertical-align: top;margin-top: 8px;">
+                </a>
+            </li>
+            <#if $!role.hasPermission('role') >
+                <li ng-class="{'active':$state.includes('role.*')}"><a ui-sref="${role.getFirstChild('role')}">首页</a>
+                    <!--<li ui-sref-active="active"><a ui-sref="${role.getFirstChild('role')}">首页</a>-->
+                </li>
+            </#if>
+            <#if $!role.hasPermission('news') >
+                <li ng-class="{'active':$state.includes('news.*')}"><a ui-sref="${role.getFirstChild('news')}">发现</a>
+                </li>
+            </#if>
+
+            <#if $!role.hasPermission('item') >
+                <li ng-class="{'active':$state.includes('item.*')}"><a ui-sref="${role.getFirstChild('item')}">好物</a>
+                </li>
+            </#if>
+
+            <li ng-class="{'active':$state.includes('community.*')}"><a ui-sref="community.home">分享</a>
+            </li>
+
+            <li ng-class="{'active':$state.includes('video.*')}"><a ui-sref="video.home">探索</a>
+            </li>
+            <#if $!role.hasPermission('shop') >
+                <li ng-class="{'active':$state.includes('shop.*')}"><a ui-sref="${role.getFirstChild('shop')}">店铺</a>
+                </li>
+            </#if>
+            <#if $!role.hasPermission('user') >
+                <li ng-class="{'active':$state.includes('user.*')}"><a ui-sref="${role.getFirstChild('user')}">用户</a>
+                </li>
+            </#if>
+            <li ng-class="{'active':$state.includes('client.*')}"><a ui-sref="client.notifyList">结算</a>
+            </li>
+            <!--            <li ng-class="{'active':$state.includes('tenant.*.*')}"><a ui-sref="tenant.home.newsList">商户</a>
+                        </li>-->
+            <li ng-class="{'active':$state.includes('weixin.*')}"><a ui-sref="weixin.list">公众号</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="left-bar ng-hide" ng-show="userData">
+    <div class="bar-img-holder">
+        <img class="bar-img-bar" src="/image/menutop.png" alt=""/>
+    </div>
+    <div class="user-holder">
+        <img class="avatar" src="/img/avatar.jpg">
+        <img class="exit" ng-click="onClickExit()" src="img/exit.png">
+        <div class="content-holder">
+            <span class="content-name">{{userData.userName}}</span>
+            <span class="content-auto">系统管理员</span>
+        </div>
+    </div>
+
+    <#if $!role.hasPrefix('role') >
+        <div class="left-btn-holder ng-hide" ng-show="$state.includes('role.*')">
+            <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+                <ul>
+                    <#if $!role.hasPermission('role.auth') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('role.auth')}"><a ui-sref="role.auth">权限管理</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('role.member') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('role.member')}"><a
+                                ui-sref="role.member">职员管理</a></li>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </#if>
+
+    <#if $!role.hasPrefix('item') >
+        <div class="left-btn-holder ng-hide" ng-show="$state.includes('item.*')">
+            <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+                <ul>
+                    <#if $!role.hasPermission('item.list') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('item.list')}"><a ui-sref="item.list">宝贝管理</a>
+                        </li>
+                    </#if>
+
+                    <#if $!role.hasPermission('item.top') >
+                        <li class="btn-title"
+
+                            ng-class="{'active':($state.includes('item.hot'))}">
+                            <a ui-sref="item.hot">宝贝置顶</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('item.add') >
+                        <li class="btn-title"
+                            ng-class="{'active':($state.includes('item.add')||$state.includes('item.shop')||$state.includes('item.single'))}">
+                            <a ui-sref="item.add">添加宝贝</a>
+                        </li>
+                    </#if>
+
+                    <#if $!role.hasPermission('item.category') >
+                        <li class="btn-title"
+                            ng-class="{'active':$state.includes('item.category')}">
+                            <a ui-sref="item.category">类目管理</a>
+                        </li>
+                    </#if>
+
+                    <#if $!role.hasPermission('item.channel') >
+                        <li class="btn-title"
+                            ng-class="{'active':$state.includes('item.channel')}">
+                            <a ui-sref="item.channel">频道管理</a>
+                        </li>
+                    </#if>
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.label')}">
+                        <a ui-sref="item.label">标签管理</a>
+                    </li>
+                    <li class="btn-title">
+                        <div class="line">
+
+                        </div>
+                    </li>
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.rebate')}">
+                        <a ui-sref="item.rebate">返利宝贝</a>
+                    </li>
+
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.editChannel')}">
+                        <a ui-sref="item.editChannel">返利频道</a>
+                    </li>
+
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.rebateCategory')}">
+                        <a ui-sref="item.rebateCategory">返利分类</a>
+                    </li>
+
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.rebateCarousel')}">
+                        <a ui-sref="item.rebateCarousel">轮播图管理</a>
+                    </li>
+
+                    <li class="btn-title"
+                        ng-class="{'active':$state.includes('item.rebatePortal')}">
+                        <a ui-sref="item.rebatePortal">分类入口管理</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </#if>
+
+    <#if $!role.hasPrefix('news') >
+        <div class="left-btn-holder ng-hide" ng-show="$state.includes('news.*')">
+            <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+                <ul>
+                    <#if $!role.hasPermission('news.list') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('news.list')}"><a ui-sref="news.list">资讯列表</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('news.edit') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('news.edit')}"><a ui-sref="news.edit">编辑资讯</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('news.material') >
+                        <li ng-show="false" class="btn-title" ng-class="{'active':$state.includes('news.material')}"><a
+                                ui-sref="news.material">素材库</a></li>
+                    </#if>
+                    <#if $!role.hasPermission('news.channellist') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('news.channellist')}"><a
+                                ui-sref="news.channellist">频道管理</a></li>
+                    </#if>
+                    <#if $!role.hasPermission('news.domainlist') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('news.domainlist')}"><a
+                                ui-sref="news.domainlist">专题管理</a></li>
+                    </#if>
+                    <#if $!role.hasPermission('news.auth') >
+                        <li class="btn-title"
+                            ng-class="{'active':($state.includes('news.auth')||$state.includes('news.authedit'))}"><a
+                                ui-sref="news.auth">作者管理</a></li>
+                    </#if>
+                    <li class="btn-title"
+                        ng-class="{'active':($state.includes('news.sourceList'))}">
+                        <a ui-sref="news.sourceList">来源管理</a>
+                    </li>
+                    <li class="btn-title"
+                        ng-class="{'active':($state.includes('news.recommend'))}">
+                        <a ui-sref="news.recommend">每日推荐</a>
+                    </li>
+
+                    <li class="btn-title"
+                        ng-class="{'active':($state.includes('news.wxcrawl'))}">
+                        <a ui-sref="news.wxcrawl">爬取管理</a>
+                    </li>
+
+                    <li class="btn-title" ng-class="{'active':$state.includes('news.home')}"><a
+                            ui-sref="news.home">首页管理</a>
+                    </li>
+                    <li class="btn-title" ng-class="{'active':$state.includes('news.carousel')}"><a
+                            ui-sref="news.carousel">轮播图</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </#if>
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('video.*')">
+        <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('video.home')}"><a
+                        ui-sref="video.home">主题管理</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('video.edit')}"><a
+                        ui-sref="video.edit">视频编辑</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('video.channel')}"><a
+                        ui-sref="video.channel">视频频道</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('video.videoList')}"><a
+                        ui-sref="video.videoList">视频管理</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <#if $!role.hasPrefix('user') >
+        <div class="left-btn-holder ng-hide" ng-show="$state.includes('user.*')">
+            <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+                <ul>
+                    <#if $!role.hasPermission('user.list') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('user.list')}"><a ui-sref="user.list">用户管理</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('user.blacklist') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('user.blacklist')}"><a
+                                ui-sref="user.blacklist">黑名单</a></li>
+                    </#if>
+                    <#if $!role.hasPermission('user.navylist') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('user.navylist')}"><a
+                                ui-sref="user.navylist">水军管理</a></li>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </#if>
+
+    <#if $!role.hasPrefix('shop') >
+        <div class="left-btn-holder ng-hide" ng-show="$state.includes('shop.*')">
+            <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+                <ul>
+                    <#if $!role.hasPermission('shop.list') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('shop.list')}"><a ui-sref="shop.list">店铺管理</a>
+                        </li>
+                    </#if>
+                    <#if $!role.hasPermission('shop.add') >
+                        <li class="btn-title" ng-class="{'active':$state.includes('shop.add')}"><a ui-sref="shop.add">新增店铺</a>
+                        </li>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </#if>
+
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('community.*')">
+        <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('community.home')}"><a ui-sref="community.home">社区管理</a></li>
+                <!--<li class="btn-title" ng-class="{'active':$state.includes('community.publish')}"><a ui-sref="community.publish">发布新帖</a></li>-->
+                <li class="btn-title" ng-class="{'active':$state.includes('community.group')}"><a ui-sref="community.group">小组管理</a></li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('community.tagManage')}"><a ui-sref="community.tagManage">标签管理</a></li>
+
+                <!--<li class="btn-title" ng-class="{'active':$state.includes('community.categorys')}"><a ui-sref="community.categorys">类目管理</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('client.*')">
+        <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('client.notifyList')}"><a
+                        ui-sref="client.notifyList">通知管理</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('client.feedback')}"><a
+                        ui-sref="client.feedback">用户反馈</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('client.CommissionManage')}"><a
+                        ui-sref="client.CommissionManage">佣金管理</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('client.IncomeManage')}"><a
+                        ui-sref="client.IncomeManage">收益管理</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('client.WithdrawManage')}"><a
+                        ui-sref="client.WithdrawManage">提现管理</a>
+                </li>
+
+                <li class="btn-title" ng-class="{'active':$state.includes('client.rechargeRecord')}"><a
+                        ui-sref="client.rechargeRecord">充值记录</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('weixin.*')">
+        <div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('weixin.list')}"><a ui-sref="weixin.list">公众号统计</a></li>
+                <!--<li class="btn-title" ng-class="{'active':$state.includes('community.publish')}"><a ui-sref="community.publish">发布新帖</a></li>-->
+                <li class="btn-title" ng-class="{'active':$state.includes('weixin.activation')}"><a ui-sref="weixin.activation">客服激活码生成</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="pingxing-title ng-scope" style="z-index: 1000; background: white; position:fixed;left: 200px; right: 0; border-top: 1px solid #eef1f5;margin-top: 20px; text-align: center; bottom: 0;">
+    <span style="line-height: 80px; color: #616161;">剁手帮管理后台® 2016</span>
+</div>
+
+<style>
+    .ng-hide {
+        display: none;
+    }
+</style>

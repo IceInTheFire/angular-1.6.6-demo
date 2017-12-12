@@ -1,0 +1,117 @@
+@import "../../config/config.less";
+.navbar-nav {
+    background: #3B3F51;
+    height:39px;
+    overflow: hidden;
+    margin: 0;
+    li {
+        width: 100px;
+        line-height: 40px;
+        background: #3B3F51;
+        float: left;
+        .logo {
+            font-size: 30px;
+            background: #3B3F51;
+        }
+      a {
+        display: block;
+        color:#fff;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        padding:0px;
+        font-size:14px;
+      }
+      &:first-child {
+        padding: 0px;
+        width: 200px;
+      }
+      >a:hover,>a:focus{
+        color: #fff;
+        background-color: #659be0;
+      }
+      &.active{
+        >a,>a:hover,>a:focus{
+          color: #484D56;
+          background-color: #fff;
+        }
+      }
+    }
+}
+.navbar {
+  min-height: 40px;
+}
+
+.form-control{
+	height: 30px;
+	line-height: 30px;
+	border:1px solid #eef1f5;
+	border-radius:4px;
+	padding:0 10px;
+	display: inline;
+}
+
+.btn-primary{
+  &:hover,&:active,&.focus,&:focus{
+	  color: #fff;
+	  background: @btn-background;
+	  border:1px solid @btn-background;
+	  border-radius: 15px;
+  }
+}
+
+.btn{
+	line-height: 1;
+	font-size: 12px;
+	border-radius: 15px;
+	min-width: 90px;
+	height: 30px;
+	background: #fff;
+	border:1px solid @btn-background;
+	color:@base-color;
+}
+.btn:focus,
+.btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus,
+.btn.active.focus {
+	outline: 0 auto -webkit-focus-ring-color;
+	outline-offset: 0;
+	border:1px solid @btn-background;
+}
+
+//.modal-body {
+//  padding: 20px 30px;
+//}
+
+
+
+.btn-item-holder{
+    position: fixed;
+	border:1px solid @border-color;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 300px;
+    top: 61px;
+    right: 20px;
+    background: #fff;
+    z-index: 900;
+    text-align: center;
+	.top-bar-fixed{
+		height: 40px;
+		background: #fefeff;
+		color: #3b3f51;
+		line-height: 40px;
+		border-bottom: 1px solid @border-color;
+		font-size: 16px;
+		font-weight: 500;
+		overflow: hidden;
+		h{
+			font-size:16px;
+		}
+	}
+	.single-btn-box{
+		padding:0 0 20px;
+		.btn{
+			margin-top: 20px;
+		}
+	}
+}

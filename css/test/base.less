@@ -1,0 +1,87 @@
+* {
+//  -moz-user-select: none; /*火狐*/
+//  -webkit-user-select: none; /*webkit浏览器*/
+//  -ms-user-select: none; /*IE10*/
+//  -khtml-user-select: none; /*早期浏览器*/
+//  user-select: none;
+
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  font-size:12px;
+  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+  padding: 0;
+  z-index: auto;
+  outline: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  white-space: nowrap;
+  margin: 0;
+}
+
+html {
+  width: 100%;
+  height:auto;
+}
+
+body {
+  background: #e9ecf3;
+  width: 100%;
+}
+
+iframe {
+  border: none;
+}
+
+@font-face {
+  font-family: 'ui-grid';
+  src: url('/css/grid-font/ui-grid.eot');
+  src: url('/css/grid-font/ui-grid.eot#iefix') format('embedded-opentype'), url('/css/grid-font/ui-grid.woff') format('woff'), url('/css/grid-font/ui-grid.ttf') format('truetype'), url('/css/grid-font/ui-grid.svg?#ui-grid') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ul,ol { list-style: none;}
+a,a:hover{text-decoration: none;}
+img { border:0 none; vertical-align:middle;}
+
+table {border-collapse: collapse;border-spacing: 0;}
+.cf:before, .cf:after {content:"";display:table;}
+.cf:after {clear:both;}
+.cf {zoom:1;}
+.clear{width:0;height:0;clear:both;overflow:hidden;}
+
+.inline-block{ display: inline-block;}
+.link{color:#F4902F;}
+.ui-grid-contents-wrapper {
+
+}
+
+input {
+  border-radius: 2px;
+}
+
+img {
+  border-radius: 4px;
+}
+
+.m-link{
+  cursor: pointer;
+}
+
+.m-default{
+  cursor: default;
+}
+
+.m-move{
+  cursor: move;
+}
+
+.m-scroll-left{
+  cursor: w-resize;
+}
+
+.m-scroll-right{
+  cursor: e-resize;
+}

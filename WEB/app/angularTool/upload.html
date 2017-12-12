@@ -1,0 +1,48 @@
+<div class="img_upload detail">
+    <div class="btn-item-holder">
+        <div class="top-bar-fixed">
+            <h>操作</h>
+        </div>
+
+        <div class="single-btn-box">
+            <button class="btn btn-primary" ng-click="onClickUpload()">上传</button>
+        </div>
+    </div>
+
+
+    <div class="top-bar">
+        <h>图片管理</h>
+    </div>
+    <div class="item-detail">
+        <div class="row">
+            <div class="col-xs-1"><span class="title">选择文件：</span></div>
+            <div class="col-xs-11">
+                <button
+                        class="btn btn-primary"
+                        ngf-select="upload($files)"
+                        accept="image/jpg,image/jpeg,image/png,image/gif"
+                        multiple
+                >选择文件</button>
+            </div>
+        </div>
+
+        <div class="row" ng-show="imgNames.length">
+            <div class="col-xs-1">
+                <span class="title">已选择:</span>
+            </div>
+            <div class="col-xs-11">
+                <span class="mr10" ng-repeat="imgName in imgNames track by $index">{{ imgName }}</span>
+            </div>
+        </div>
+
+        <div class="row" ng-repeat="returnImg in returnImgs track by $index">
+            <div class="col-xs-1">
+                <img class="cover-img" ng-src="{{returnImg}}">
+            </div>
+            <div class="col-xs-11">
+                {{ returnImg }}
+            </div>
+        </div>
+    </div>
+</div>
+<loading is-show="loading"></loading>

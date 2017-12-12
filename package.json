@@ -1,0 +1,34 @@
+{
+  "name": "angular1.5.8-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-notification": "^0.3.6",
+    "angular-ui-router": "^0.4.2",
+    "jquery": "^2.2.2",
+    "ng-file-upload": "^12.2.13",
+    "oclazyload": "^1.0.9"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.4.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-less": "^3.3.0",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.2.2",
+    "gulp-rev-replace": "^0.4.3",
+    "gulp-uglify": "^3.0.0",
+    "merge-stream": "^1.0.1",
+    "gulp-watch": "^4.3.5"
+  }
+}

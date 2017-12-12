@@ -1,0 +1,174 @@
+@import "../../config/config.less";
+.main-content {
+    margin: 21px 20px 20px 220px;
+    //background: #e9ecf3;
+  
+    text-align: left;
+    padding: 0 0 100px;
+    background: #fff;
+    border: 1px solid @border-color;
+    border-radius:4px;
+    overflow: hidden;
+    min-width:1000px;
+ }
+
+.all-main-content {
+  min-height: 500px;
+  background: white;
+}
+.logoImg{
+}
+
+.navigation {
+  position: absolute;
+  z-index: 900;
+  width: 100%;
+  height: 40px;
+  left: 0;
+  top: 0;
+  background: #121212;
+  font-size: 0;
+  .dsb-logo {
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+  }
+  .a-btn {
+    vertical-align: top;
+    font-size: 20px;
+    line-height: 40px;
+    color: white;
+    width: 80px;
+    background: #121212;
+    border: none;
+  }
+}
+
+.left-bar {
+  height: 100%;
+  width: 200px;
+  top: 39px;
+  left: 0;
+  position: fixed;
+  background: white;
+  z-index: 800;
+  border-right: 1px solid #eef1f5;
+  .bar-img-holder {
+    .bar-img-bar {
+      width: 200px;
+      vertical-align: top;
+    }
+  }
+  .user-holder {
+    position: relative;
+    font-size: 0;
+    padding: 10px 0;
+    background: #fcfcfc;
+    border-bottom: 1px solid #F3F3F3;
+    .exit {
+      position: absolute;
+      top: 18px;
+      right: 15px;
+      height: 15px;
+      width: 15px;
+    }
+    .avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      margin-left: 20px;
+    }
+    .content-holder {
+      margin-left: 10px;
+      vertical-align: top;
+      display: inline-block;
+      .content-name {
+        margin-top: 2px;
+        display: block;
+        line-height: 30px;
+        font-size: 12px;
+        color: #678098;
+      }
+      .content-auto {
+        display: block;
+        color: #678098;
+        line-height: 20px;
+      }
+    }
+  }
+  .left-btn-holder {
+    position: absolute;
+    top: 72px;
+    left: 0px;
+    right: 0px;
+    bottom: 40px;
+
+    .line {
+      height: 1px;
+      background: #F3F3F3;
+    }
+
+    .btn-holder {
+      background: white;
+      position: relative;
+      overflow-y: auto;
+      height: 100%;
+      ul{
+        li{background: #fff;
+          a{ display: block; height: 40px; line-height: 40px;color:#5b9bd1;
+            text-indent: 30px;}
+          &.active{ background:#f2f6f9;
+            a{
+              &:focus{
+                text-decoration: none;
+              }
+              color:#5b9bd1;
+            }
+          }
+        }
+      }
+      .btn-title {
+        line-height: 60px;
+      }
+      .turn-right {
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: 50%;
+        margin-top: -10px;
+        right: 20px;
+      }
+    }
+  }
+}
+
+.detail{
+
+  .top-bar{
+    height: 40px;
+    background: #fefeff;
+    color: #3b3f51;
+    line-height: 40px;
+    border-bottom: 1px solid @border-color;
+    font-size: 16px;
+    font-weight: 500;
+    overflow: hidden;
+    padding-left:20px;
+    h{
+      font-size:16px;
+    }
+  }
+  .item-detail{
+     padding: 20px 30px 30px;
+    .row{
+      position: relative;
+      margin-top: 10px;
+      line-height: 30px;
+      overflow: hidden;
+    }
+  }
+}
+.title{
+  font-size: 14px;
+  color: #8c8c8c;
+}

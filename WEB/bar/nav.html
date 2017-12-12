@@ -1,0 +1,95 @@
+<nav class="navbar" role="navigation" style="z-index: 900;">
+    <div class="navbar-header">
+        <img class="dsb-logo" src="">
+    </div>
+    <div>
+        <ul class="nav navbar-nav navbar-fixed-top">
+            <li>
+                <a href="#" class="logo">
+                    <img src="img/login/logo.png" style="vertical-align: top;margin-top: 8px;">
+                </a>
+            </li>
+
+            <!--<li ng-class="{'active':$state.includes('welcome.*')}"><a href="#/welcome/welcome">欢迎</a>-->
+            <!--</li>-->
+
+            <li ng-class="{'active':$state.includes('angularTool.*')}"><a href="#/angularTool/tinymce">angular工具</a>
+            </li>
+            <li ng-class="{'active':$state.includes('user.*')}"><a href="#/user/list">账号管理</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="left-bar" ng-show="userData">
+    <!--<div class="bar-img-holder">-->
+        <!--<img class="bar-img-bar" src="img/menutop.png" alt=""/>-->
+    <!--</div>-->
+    <div class="user-holder">
+        <img class="avatar" src="img/avatar.jpg">
+        <img class="exit" ng-click="onClickExit()" src="img/exit.png">
+        <div class="content-holder">
+            <span class="content-name">{{userData.userName}}</span>
+            <span class="content-auto">系统管理员</span>
+        </div>
+    </div>
+
+
+    <!--<div class="left-btn-holder ng-hide" ng-show="$state.includes('welcome.*')">-->
+        <!--<div class="btn-holder" ng-class="{'btn-holder-select':click}" ng-click="click=true">-->
+            <!--<ul>-->
+                <!--<li class="btn-title" ng-class="{'active':$state.includes('welcome.welcome')}"><a-->
+                        <!--href="#/welcome/welcome">欢迎</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('angularTool.*')">
+        <div class="btn-holder">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.tinymce')}"><a
+                        href="#/angularTool/tinymce">富文本编辑器</a>
+                </li>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.modal')}"><a
+                        href="#/angularTool/modal">模态框</a>
+                </li>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.notification')}"><a
+                        href="#/angularTool/notification">提示语</a>
+                </li>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.drag')}"><a
+                        href="#/angularTool/drag">拖拽</a>
+                </li>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.cropper')}"><a
+                        href="#/angularTool/cropper">裁剪</a>
+                </li>
+                <li class="btn-title" ng-class="{'active':$state.includes('angularTool.upload')}"><a
+                        href="#/angularTool/upload">上传</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="left-btn-holder ng-hide" ng-show="$state.includes('user.*')">
+        <div class="btn-holder">
+            <ul>
+                <li class="btn-title" ng-class="{'active':$state.includes('user.list')}"><a
+                        href="#/user/list">账号管理</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="" style="z-index: 1000; background: white; position:fixed;left: 200px; right: 0; border-top: 1px solid #eef1f5;margin-top: 20px; text-align: center; bottom: 0;">
+    <span style="line-height: 80px; color: #616161;">灬安俱乐部管理后台® 2016</span>
+</div>
+
+<div class="main-content" ui-view></div>
+
+<style>
+    .ng-hide {
+        display: none;
+    }
+</style>

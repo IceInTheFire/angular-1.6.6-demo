@@ -1,0 +1,90 @@
+{
+  "_from": "gulp-rev@^5.1.0",
+  "_id": "gulp-rev@5.1.0",
+  "_inBundle": false,
+  "_integrity": "sha1-osN82uMhp7e7riDXU7YNDl6HzUg=",
+  "_location": "/gulp-rev",
+  "_phantomChildren": {
+    "readable-stream": "1.0.34",
+    "xtend": "4.0.1"
+  },
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "gulp-rev@^5.1.0",
+    "name": "gulp-rev",
+    "escapedName": "gulp-rev",
+    "rawSpec": "^5.1.0",
+    "saveSpec": null,
+    "fetchSpec": "^5.1.0"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/gulp-rev/-/gulp-rev-5.1.0.tgz",
+  "_shasum": "a2c37cdae321a7b7bbae20d753b60d0e5e87cd48",
+  "_spec": "gulp-rev@^5.1.0",
+  "_where": "/Users/a56832357/Documents/gulp-test/gulp-automatic-add-version-master",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "bugs": {
+    "url": "https://github.com/sindresorhus/gulp-rev/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "gulp-util": "^3.0.0",
+    "object-assign": "^2.0.0",
+    "rev-hash": "^1.0.0",
+    "rev-path": "^1.0.0",
+    "sort-keys": "^1.0.0",
+    "through2": "^0.6.1",
+    "vinyl-file": "^1.1.0"
+  },
+  "deprecated": false,
+  "description": "Static asset revisioning by appending content hash to filenames: unicorn.css => unicorn-d41d8cd98f.css",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "homepage": "https://github.com/sindresorhus/gulp-rev#readme",
+  "keywords": [
+    "gulpplugin",
+    "rev",
+    "revving",
+    "revision",
+    "hash",
+    "optimize",
+    "version",
+    "versioning",
+    "cache",
+    "expire",
+    "static",
+    "asset",
+    "assets"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Justin Hileman",
+      "email": "justin@justinhileman.info",
+      "url": "justinhileman.info"
+    }
+  ],
+  "name": "gulp-rev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sindresorhus/gulp-rev.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "5.1.0"
+}
