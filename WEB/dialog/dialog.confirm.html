@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h>{{params.header}}</h>
+</div>
+<div class="modal-body">
+    {{params.body}}
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="onClickOk()" ng-disabled="loading">确认</button>
+    <button class="btn btn-danger" ng-click="onClickCancel()" ng-disabled="loading">取消</button>
+</div>
+<loading is-show="loading"></loading>

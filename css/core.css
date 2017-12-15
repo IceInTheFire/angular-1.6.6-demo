@@ -137,14 +137,29 @@ img {
   padding: 0 10px;
   display: inline;
 }
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary.focus,
-.btn-primary:focus {
+.btn.btn-primary:active {
   color: #fff;
   background: #32c5d2;
   border: 1px solid #32c5d2;
   border-radius: 15px;
+}
+.btn-primary {
+  border: 1px solid #32c5d2;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:disabled {
+  color: #fff;
+  background: #32c5d2;
+  border: 1px solid #32c5d2;
+  border-radius: 15px;
+}
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:disabled {
+  color: #fff;
 }
 .btn {
   line-height: 1;
@@ -153,10 +168,10 @@ img {
   min-width: 90px;
   height: 30px;
   background: #fff;
-  border: 1px solid #32c5d2;
   color: #333;
 }
 .btn:focus,
+.btn:active,
 .btn:active:focus,
 .btn.active:focus,
 .btn.focus,
@@ -198,42 +213,39 @@ img {
   margin-top: 20px;
 }
 
-.error-span {
-  line-height: 30px;
-  margin-left: 10px;
-  color: red;
-}
-.ui-notification.info {
-  background: #5bb1e2;
+/*
+* 提示框 公共样式
+*/
+.ui-notification.success {
+  background: #5cb85c;
 }
 .ui-notification.error {
   background: #da615d;
 }
-.ui-notification.success {
-  background: #5cb85c;
+.ui-notification.info {
+  background: #5bb1e2;
 }
-.succeed {
-  color: #0b97c4;
+/*
+* dialog 公共样式
+*/
+.modal-content .modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 16.42857143px;
 }
-.fail {
-  color: red;
+.modal-content .modal-body {
+  padding: 20px 30px;
 }
-.multi-line {
-  word-wrap: normal;
-  white-space: normal;
-}
-.one-line {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.mr10 {
-  margin-right: 10px;
+.modal-content .modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
 }
 
 .main-content {
   margin: 21px 20px 20px 220px;
-  text-align: left;
+}
+.main-content .detail {
   padding: 0 0 100px;
   background: #fff;
   border: 1px solid #dfe8f1;
@@ -394,6 +406,7 @@ img {
   font-size: 14px;
   color: #8c8c8c;
 }
+
 
 .spinner {
   width: 50px;

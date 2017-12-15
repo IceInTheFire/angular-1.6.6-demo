@@ -42,20 +42,23 @@ gulp.task("release", ["rev-replace"], function() {
 });
 gulp.task('watch', function () {
 
-    var jsWatcher = gulp.watch(['js/holder/*.js', 'js/core/*.js','js/dialog/**/dialog.*.js'], ['build-core-js']);
+    // var jsWatcher = gulp.watch(['js/holder/*.js', 'js/core/*.js','js/dialog/**/dialog.*.js'], ['build-core-js']);
+    var jsWatcher = gulp.watch(['js/core-holder/*.js', 'js/core/*.js','js/dialog/dialog.*.js'], ['build-core-js']);
     jsWatcher.on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 
     for(var i in apps) {
         var jsSrc = 'js/app/' + apps[i] + '/controller.*.js';
-        var jsTemplateWatcher = gulp.watch([jsSrc], ['build-template-js']);
+        var jsDialogSrc = 'js/app/' + apps[i] + '/dialog/dialog.*.js';
+        var jsTemplateWatcher = gulp.watch([jsSrc,jsDialogSrc], ['build-template-js']);
         jsTemplateWatcher.on('change', function (event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         });
 
         var cssSrc = 'css/app/' + apps[i] + '/*.less';
-        var jsTemplateWatcher = gulp.watch([cssSrc], ['build-template-css']);
+        var cssDialogSrc = 'css/app/' + apps[i] + '/dialog/dialog.*.less';
+        var jsTemplateWatcher = gulp.watch([cssSrc,cssDialogSrc], ['build-template-css']);
         jsTemplateWatcher.on('change', function (event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         });
@@ -189,7 +192,7 @@ gulp.task('clean-template-css', function () {
 gulp.task('build-template-css',['clean-template-css'], function() {
     var tasks = [];
     for(var i in apps) {
-        var task = gulp.src(['css/app/'+apps[i]+'/*.less'])
+        var task = gulp.src(['css/app/'+apps[i]+'/**/*.less'])
             .pipe(less())
             .pipe(autoprefixer({
                 browsers: ['last 2 versions'],
@@ -237,7 +240,7 @@ gulp.task('clean-template-js', function () {
 gulp.task('build-template-js', ['clean-template-js'], function() {
     var tasks = [];
     for(var i in apps) {
-        var task = gulp.src(['js/app/'+apps[i]+'/*.js','!js/app/'+apps[i]+'/template.js','!js/app/'+apps[i]+'/template.min.js'])
+        var task = gulp.src(['js/app/'+apps[i]+'/**/*.js','!js/app/'+apps[i]+'/template.js','!js/app/'+apps[i]+'/template.min.js'])
         // .pipe(uglify())
             .pipe(concat('template.js'))
             .pipe(gulp.dest('js/app/'+apps[i]));
@@ -336,8 +339,9 @@ gulp.task("build-node-js", function() {
         './node_modules/jquery/dist/jquery.min.js',
         './node_modules/angular-ui-router/release/angular-ui-router.min.js',
         './node_modules/oclazyload/dist/ocLazyLoad.min.js',
+
         // './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
-        // './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+        './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
         // './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.js',
         // './node_modules/angular-sortable-view/src/angular-sortable-view.min.js',
         './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',

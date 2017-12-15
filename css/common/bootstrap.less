@@ -51,13 +51,25 @@
 	display: inline;
 }
 
+.btn.btn-primary:active{
+	color: #fff;
+	background: @btn-background;
+	border:1px solid @btn-background;
+	border-radius: 15px;
+}
 .btn-primary{
-  &:hover,&:active,&.focus,&:focus{
+	border:1px solid @btn-background;
+  &:hover,&:active,&:focus,&:disabled{
 	  color: #fff;
 	  background: @btn-background;
 	  border:1px solid @btn-background;
 	  border-radius: 15px;
   }
+}
+.btn-danger{
+	&:hover,&:active,&:focus,&:disabled{
+		color: #fff;
+	}
 }
 
 .btn{
@@ -67,13 +79,14 @@
 	min-width: 90px;
 	height: 30px;
 	background: #fff;
-	border:1px solid @btn-background;
+	//border:1px solid @btn-background;
 	color:@base-color;
 }
-.btn:focus,
+.btn:focus,.btn:active,
 .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus,
-.btn.active.focus {
+.btn.active.focus{
 	outline: 0 auto -webkit-focus-ring-color;
+	//outline:none;   //去掉边框
 	outline-offset: 0;
 	border:1px solid @btn-background;
 }

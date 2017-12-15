@@ -6,7 +6,7 @@
         .module('app.core')
         .config(['NotificationProvider', configNotification])
         // .factory('Core', ['$rootScope', '$window', '$document', '$timeout', '$interval','$filter','$q', '$state','$compile','Foundation', 'Api', 'Const', 'Data','$uibModal','Upload','Notification','Util','mouseEventPosition',Core]);
-        .factory('Core', ['$rootScope','Notification','Upload',Core]);
+        .factory('Core', ['$rootScope','Notification','Upload','$uibModal','Util',Core]);
     function configNotification(NotificationProvider) {
         NotificationProvider.setOptions({
             delay: 2500,
@@ -19,7 +19,7 @@
         });
     }
 
-    function Core($rootScope,Notification,Upload) {
+    function Core($rootScope,Notification,Upload,$uibModal,Util) {
         console.log("测试下");
         console.log($rootScope);
         // console.log($window);
@@ -32,6 +32,7 @@
         // console.log($compile);
         // console.log(Foundation);
         // console.log(Api);
+        console.log($uibModal);
         console.log("end");
 
         var Core = {
@@ -55,13 +56,13 @@
             // Api: Api,
             // Const: Const,
             // Data: Data,
-            // $uibModal:$uibModal,
+            $uibModal:$uibModal,
             Upload:Upload,
 
             Notify:Notification,
 
             // Foundation: Foundation,
-            // Util: Util,
+            Util: Util,
             // // mouseEventPosition:mouseEventPosition,
             // clone: Foundation.clone,
             // checkIdCard: Foundation.checkIdCard

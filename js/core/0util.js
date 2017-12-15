@@ -40,7 +40,8 @@
             imgPosition : getImgPosition,
             getStringLength: getStringLength,
             getNormalDate: getNormalDate,
-            unicodeAbc:unicodeAbc
+            unicodeAbc:unicodeAbc,
+            confirm:confirm
         };
 
         function getNormalDate() {
@@ -310,7 +311,6 @@
             return str
 
         }
-
 
         function containsKey(object, keys) {
             if (!object) {
@@ -1079,6 +1079,29 @@
                 data.push(String.fromCharCode(i))
             }
             return data;
+        }
+
+        function confirm(Core,params) {
+            var modalInstance = Core.$uibModal.open({
+                animation: true,
+                windowClass: "dialogConfirm",
+                controller: 'dialog.confirm',
+                templateUrl: './WEB/dialog/dialog.confirm.html',
+                resolve: {
+                    params: function() {
+                        return {
+                            header:params.header,
+                            body:params.body
+                        }
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                params.ok && params.ok();
+            }, function (data) {
+                params.cancel && params.cancel();
+            });
         }
     }
 })();

@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h>普通弹框</h>
+</div>
+<div class="modal-body">
+    普通弹框,请静等三秒钟
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="onClickOk()" ng-disabled="loading">保存</button>
+    <button class="btn btn-danger" ng-click="onClickCancel()" ng-disabled="loading">取消</button>
+</div>
+<loading is-show="loading"></loading>
