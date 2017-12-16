@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.6",
+    "angular-sortable-view": "0.0.15",
     "angular-ui-bootstrap": "^2.5.6",
     "angular-ui-notification": "^0.3.6",
     "angular-ui-router": "^0.4.2",

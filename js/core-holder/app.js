@@ -5,6 +5,7 @@
         'app.core',
         'ngFileUpload',
         'ui.bootstrap',     //模态框
+        'angular-sortable-view'
 
     ]);
 

@@ -341,11 +341,12 @@ gulp.task("build-node-js", function() {
         './node_modules/oclazyload/dist/ocLazyLoad.min.js',
 
         // './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
-        './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+        './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',    //模态框
         // './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.js',
         // './node_modules/angular-sortable-view/src/angular-sortable-view.min.js',
         './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
         './node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
+        // './node_modules/angular-sortable-view/angular-sortable-view.js',
         // './node_modules/video.js/dist/video.min.js',
         // './node_modules/flv.js/dist/flv.min.js',
         // './node_modules/cropper/dist/cropper.min.js',
@@ -371,7 +372,7 @@ gulp.task("build-lib-js", function() {
         './lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
         // './lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.min.js',
         './lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js',
-        // './lib/angular-sortable-view/angular-sortable-view.js',
+        './lib/angular-sortable-view/src/angular-sortable-view.js',
         // 'js/**/**.js', '!js/app/**/**.js',
         // '!js/holder/**/**.js',
         // 'js/core/0.js',

@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h>普通弹框</h>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" sv-root sv-part="data">
+            <div class="kuai" ng-repeat="color in data track by $index" ng-style="{'background':color}" sv-element sv-stop="stop">
+                <span class="handle"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="onClickOk()" ng-disabled="loading">保存</button>
+    <button class="btn btn-danger" ng-click="onClickCancel()" ng-disabled="loading">取消</button>
+</div>
+<loading is-show="loading"></loading>

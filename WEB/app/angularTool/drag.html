@@ -1,1 +1,42 @@
-拖拽
+<div class="drag-detail detail">
+    <div class="top-bar">
+        <h>拖拽</h>
+    </div>
+    <div class="item-detail">
+        <div class="row">
+            <div class="col-xs-1"><span class="title">参考网站：</span></div>
+            <div class="col-xs-11">
+                <a href="https://kamilkp.github.io/angular-sortable-view/" target=_blank> https://kamilkp.github.io/angular-sortable-view/</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1"><span class="title">demo</span></div>
+            <div class="col-xs-11">
+                <button class="btn btn-primary" ng-click="onClickLog()">打印数组</button>
+                <button class="btn btn-primary" ng-click="stop=!stop">{{stop?"开启":"关闭"}}拖拽</button>
+                <button class="btn btn-primary" ng-click="onClickMoveUp()">上下弹框拖拽</button>
+                <button class="btn btn-primary" ng-click="onClickMoveLeft()">左右弹框拖拽</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" sv-root sv-part="data">
+                <div class="kuai" ng-repeat="color in data track by $index" ng-style="{'background':color}" sv-element sv-stop="stop">
+                    <span class="handle"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-11">
+                <span class="title">上面是全屏拖拽（若有input、select的话，会有bug），下面是手柄拖拽。</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" sv-root sv-part="data">
+                <div class="kuai" ng-repeat="color in data track by $index" ng-style="{'background':color}" sv-element  >
+                    <span class="handle" sv-handle></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
