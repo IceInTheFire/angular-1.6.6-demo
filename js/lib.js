@@ -406,10 +406,6 @@
 				var moveExecuted;
 
 				function onMousedown(e){
-                    if($parse($attrs.svStop)($scope)) {
-                        return;
-                    }
-
 					touchFix(e);
 
 					if($controllers[1].sortingInProgress()) return;
@@ -489,12 +485,19 @@
 					// onMousemove(e);
 					function onMousemove(e){
 						touchFix(e);
+                        var modal = document.getElementsByClassName("modal-dialog");
+                        var modalLeft = 0,modalTop = 0;
+                        if(modal.length > 0) {
+                            var modalFirst = modal[0].getBoundingClientRect();
+                            modalLeft = modalFirst.left;
+                            modalTop  = modalFirst.top;
+                        }
 						if(!moveExecuted){
 							$element.parent().prepend(clone);
 							moveExecuted = true;
 						}
 						$controllers[1].$moveUpdate(opts, {
-							x: e.clientX,
+							x: e.clientX - modalLeft,
 							y: e.clientY,
 							offset: pointerOffset
 						}, clone, $element, placeholder, $controllers[0].getPart(), $scope.$index);

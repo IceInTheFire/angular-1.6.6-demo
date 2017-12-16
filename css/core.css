@@ -417,6 +417,7 @@ img {
   color: #8c8c8c;
 }
 
+
 .spinner {
   width: 50px;
   height: 50px;
@@ -533,4 +534,3 @@ img {
     -webkit-transform: scale(1);
   }
 }
-

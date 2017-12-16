@@ -56,7 +56,20 @@
         }
 
         function onClickMoveLeft() {
+            var modalInstance = Core.$uibModal.open({
+                animation: true,
+                windowClass: "dialogMoveLeft",
+                controller: 'angularTool.dialog.moveLeft',
+                templateUrl: './WEB/app/angularTool/dialog/dialog.moveLeft.html',
+                resolve: {
+                }
+            });
 
+            modalInstance.result.then(function (data) {
+                console.log("你点击了确定");
+            }, function (data) {
+                console.log("你点击了取消");
+            });
         }
     }
 })();

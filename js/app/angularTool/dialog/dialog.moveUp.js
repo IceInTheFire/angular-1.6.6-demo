@@ -12,7 +12,6 @@
 
         init();
         function init() {
-            console.log("????");
             context.data = [
                 'red',
                 'yellow',
