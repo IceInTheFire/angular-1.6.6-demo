@@ -4,8 +4,10 @@
 
     appModule.directive('loading',loadingController);
     appModule.directive('ngEnter',['$parse',ngEnterController]);
-    appModule.directive('dblFocus',['$timeout',dblFocus]);
     appModule.directive('timepicker',['$timeout',timepicker]);
+    
+
+    appModule.directive('dblFocus',['$timeout',dblFocus]);
     appModule.directive('onRepeatFinishedRender', ['$timeout', repeatFinished]);
     appModule.directive('dblFocus',['$timeout',dblFocus]);
     appModule.directive('imgEdit', ['Core', imgEdit]);
@@ -90,21 +92,21 @@
                         autoclose: false,
                         todayBtn: true,
                         minuteStep: 1,
-                        language: 'fr',
+                        language: 'fr',     //中文
                         forceParse: false,  //选择框取消后不允许修改
                         todayHighlight: true,       //高亮显示今天日期
                         viewSelect: 'year',
                         format:'yyyy-mm-dd hh:ii:00'
+                        // format:'yyyy-mm-dd hh:ii:ss'
                     }).on('hide', function() {
-                        var $this = $(this);
-                        var _this = this.children[0];
+                        // var $this = $(this);
+                        var _this = $(this.children[0]);
                         scope.$apply(function(){
-                            if($this.attr('ng-model')) {
-                                eval('scope.'+$this.attr('ng-model')+'=_this.value');
+                            if(_this.attr('ng-model')) {
+                                // console.log(_this.attr('ng-model'));
+                                // console.log('scope.'+_this.attr('ng-model')+'=_this.val()');
+                                eval('scope.'+_this.attr('ng-model')+'=_this.val()');
                             }
-                            // eval('scope.'+$this.attr('ng-model')+'=_this.value');
-                            // scope[$this.attr('ng-model')] = _this.value;
-
                         });
                     });
                 });

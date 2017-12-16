@@ -241,6 +241,16 @@ img {
   text-align: right;
   border-top: 1px solid #e5e5e5;
 }
+/*
+* timepicker 样式
+*/
+.timepicker {
+  display: inline-block;
+  width: 205px;
+}
+.timepicker input {
+  display: block;
+}
 
 .main-content {
   margin: 21px 20px 20px 220px;
@@ -407,7 +417,6 @@ img {
   color: #8c8c8c;
 }
 
-
 .spinner {
   width: 50px;
   height: 50px;
@@ -524,3 +533,4 @@ img {
     -webkit-transform: scale(1);
   }
 }
+

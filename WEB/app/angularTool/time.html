@@ -1,0 +1,31 @@
+<div class="detail">
+    <div class="top-bar">
+        <h>模态框</h>
+    </div>
+    <div class="item-detail">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="date timepicker" timepicker>
+                    <input size="16" type="text" class="form-control" ng-model="data.time">
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-1">
+                <span class="title">时间：</span>
+            </div>
+            <div class="col-xs-10">
+                {{data.time}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-primary" ng-click="logTime()">打印时间</button>
+            </div>
+        </div>
+    </div>
+</div>
+

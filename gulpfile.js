@@ -370,7 +370,7 @@ gulp.task("build-lib-js", function() {
         // './lib/jqueryform/jquery.form.min.js',
         './lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
         // './lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.min.js',
-        // './lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js',
+        './lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js',
         // './lib/angular-sortable-view/angular-sortable-view.js',
         // 'js/**/**.js', '!js/app/**/**.js',
         // '!js/holder/**/**.js',
@@ -444,7 +444,7 @@ gulp.task("build-lib-css", function() {
     return gulp.src([
         './lib/bootstrap/css/bootstrap.css',
         // './lib/angular-ui-grid/ui-grid.min.css',
-        // './lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
+        './lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
     ])
         .pipe(less())
         .pipe(autoprefixer({

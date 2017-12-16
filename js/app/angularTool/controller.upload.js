@@ -36,8 +36,8 @@
             }
             //请求两次，是因为其中一次是跨域
             Core.Upload.upload({
-                // url: 'http://yueqingfang.cn/markdown/php/imgUpload_batch.php',
-                url: 'http://localhost/php/imgUpload22_batch.php',
+                url: 'http://yueqingfang.cn/markdown/php/imgUpload_batch.php',
+                // url: 'http://localhost/php/imgUpload22_batch.php',
                 data: context.data,
             }).progress(function (evt) {
                 ////进度条
