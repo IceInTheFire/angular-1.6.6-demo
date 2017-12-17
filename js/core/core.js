@@ -6,7 +6,7 @@
         .module('app.core')
         .config(['NotificationProvider', configNotification])
         // .factory('Core', ['$rootScope', '$window', '$document', '$timeout', '$interval','$filter','$q', '$state','$compile','Foundation', 'Api', 'Const', 'Data','$uibModal','Upload','Notification','Util','mouseEventPosition',Core]);
-        .factory('Core', ['$rootScope','Notification','Upload','$uibModal','Util',Core]);
+        .factory('Core', ['$rootScope','Notification','Upload','$uibModal','Util','Api',Core]);
     function configNotification(NotificationProvider) {
         NotificationProvider.setOptions({
             delay: 2500,
@@ -19,7 +19,7 @@
         });
     }
 
-    function Core($rootScope,Notification,Upload,$uibModal,Util) {
+    function Core($rootScope,Notification,Upload,$uibModal,Util,Api) {
         console.log("测试下");
         console.log($rootScope);
         // console.log($window);
@@ -53,7 +53,7 @@
             // $q: $q,
             // $state: $state,
             // $compile:$compile,
-            // Api: Api,
+            Api: Api,
             // Const: Const,
             // Data: Data,
             $uibModal:$uibModal,

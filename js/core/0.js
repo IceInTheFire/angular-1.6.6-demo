@@ -3,5 +3,5 @@
 * */
 (function () {
     angular
-        .module('app.core', ['ui-notification']);
+        .module('app.core', ['LocalStorageModule','ui-notification']);
 })();

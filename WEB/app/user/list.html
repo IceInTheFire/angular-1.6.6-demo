@@ -1,1 +1,19 @@
-账号管理
+<div class="list">
+  <table class="table table-bordered table-striped table-hover">
+      <theader>
+          <tr>
+              <th>ID</th>
+              <th>姓名</th>
+          </tr>
+      </theader>
+      <tbody>
+          <tr ng-repeat="item in data track by $index">
+              <td>{{item.uid}}</td>
+              <td>{{item.uname}}</td>
+          </tr>
+      </tbody>
+      <!--<tfoot></tfoot>-->
+  </table>
+</div>
+<loading is-show="loading"></loading>
+

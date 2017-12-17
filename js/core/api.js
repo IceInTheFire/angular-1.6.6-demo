@@ -13,9 +13,10 @@
         .factory('Api', ['$http', '$q', 'Data', 'Notification', Api]);
 
     function Api($http, $q, Data, Notification) {
+        var url = 'http://yueqingfang.cn/markdown';
         var apiList = {//所有接口list
-            Common:{
-                getSimpleItemInfo:"/item/simple_share_list_by_ids.html",//获取
+            User:{
+                list:url + "/php/conn.php",//获取
             },
         };
 

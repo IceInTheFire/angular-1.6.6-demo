@@ -3,9 +3,297 @@
 * */
 (function () {
     angular
-        .module('app.core', ['ui-notification']);
+        .module('app.core', ['LocalStorageModule','ui-notification']);
 })();
 
+/**
+ * 常量定义的factory
+ */
+
+(function () {
+    angular
+        .module('app.core')
+        .factory('Const', Const);
+
+    function Const() {
+        return {
+            //******
+
+
+            // style="max-width: 50px; max-height: 30px;" class="gridpadding" ng-mousemove="grid.appScope.onMouseMove($event)" ng-mouseenter="grid.appScope.onMouseEnter(row.entity)" ng-mouseleave="grid.appScope.onMouseLeave(row.entity)"
+            DATA: {
+                KEY_USER: 'user-info',
+                KEY_PREFIX: 'px.user.data.',
+                KEY_TOKEN: 'token',
+            },
+            ITEMS :{
+                type:'type',
+                shop:'shop',
+                brand:'shop',
+                firstCate:'firstCate',
+                secondCate:'secondCate'
+            },
+            INDEX :{
+                tabId:'tabId',
+                moduleId:'moduleId',
+                layoutTypeId:'layoutTypeId'
+            },
+            TRADE :{
+                orderStatus:'orderStatus',
+                orderIndex:'orderIndex',
+                orderInfos:'orderInfos',
+                officialInfos:'officialInfos'
+            },
+
+            KEYWORD : {
+                type: 'keyword-type',
+            },
+            community: {
+                tinymceBody:'tinymce-body'
+            },
+
+            Error: {
+                unKnow: 1001,
+                system: 1002,
+                updateSql: 1003,
+                insertSql: 1004,
+                upload: 1005,
+                unLogin: 2001,
+                paramMiss: 2002,
+                paramError: 2003,
+                userName: 2004,
+                userPassword: 2005,
+                loginError: 2006,
+                labelError: 2007,
+                packageUnOut: 2008,
+                packageNotExist: 2009,
+                orderNotExist: 2010,
+                samePassword: 2011,
+                errorPassword: 2012,
+                packageOut: 2013,
+                packageItemUpdate: 2014,
+                newPackageIn: 2015,
+                packageItemNotExist: 2016,
+                packageItemNum: 2017,
+                orderCancel: 2018,
+                bindPackageFail: 2019,
+                packageAlreadyOut: 2020,
+                codeValidate: 2022
+            },
+            ImgUrl: '/item/upload_image.html',
+            TextFile: '/idcard/photo/upload.json',
+            ImgPrefix: '/idcard/photo/',
+            QiNiu: 'http://static.ipingxing.com/'
+        }
+    }
+})();
+/**
+ * 本地数据调用的factory
+ */
+(function () {
+    angular
+        .module('app.core')
+        .factory('Data', ['localStorageService', 'Const', Data]);
+
+    function Data(localStorageService, Const) {
+        return {
+            getUser: getUser,
+            setUser: setUser,
+            getToken: getToken,
+            setToken: setToken,
+            get: get,
+            set: set,
+            clearLocalData: clearLocalData,
+            setItemType:setItemType,
+            getItemType:getItemType,
+            setItemBrand:setItemBrand,
+            getItemBrand:getItemBrand,
+            setItemShop:setItemShop,
+            getItemShop:getItemShop,
+            setItemFirstCate:setItemFirstCate,
+            getItemFirstCate:getItemFirstCate,
+            setItemSecondCate:setItemSecondCate,
+            getItemSecondCate:getItemSecondCate,
+            setIndexTabType:setIndexTabType,
+            getIndexTabType:getIndexTabType,
+            setIndexModuleType:setIndexModuleType,
+            getIndexModuleType:getIndexModuleType,
+            setIndexLayoutType:setIndexLayoutType,
+            getIndexLayoutType:getIndexLayoutType,
+            setOrderStatus:setOrderStatus,
+            getOrderStatus:getOrderStatus,
+            setOrderIndex:setOrderIndex,
+            getOrderIndex:getOrderIndex,
+            setOrderInfos:setOrderInfos,
+            getOrderInfos:getOrderInfos,
+            setOrderdetailSetOrderOfficial:setOrderdetailSetOrderOfficial,
+            getOrderdetailSetOrderOfficial:getOrderdetailSetOrderOfficial,
+            setKeywordType:setKeywordType,
+            getKeywordType:getKeywordType,
+            setTinymceBody: setTinymceBody,
+            getTinymceBody: getTinymceBody,
+
+
+        };
+
+        function clearLocalData() {
+            localStorageService.clearAll();
+        }
+
+        function getKey(key) {
+            return Const.DATA.KEY_PREFIX + key;
+        }
+
+        function removeKey(key) {
+            localStorageService.removeItem(key);
+        }
+
+        function get(key) {
+            key = getKey(key);
+            return localStorageService.get(key);
+        }
+
+        function set(key, val) {
+            key = getKey(key);
+            return localStorageService.set(key, val);
+        }
+
+        function getToken() {
+            var key = Const.DATA.KEY_TOKEN;
+            return get(key);
+        }
+
+        function setToken(token) {
+            var key = Const.DATA.KEY_TOKEN;
+            set(key, token);
+        }
+
+        function getUser() {
+            var key = Const.DATA.KEY_USER;
+            return get(key);
+        }
+
+        function setUser(user) {
+            var key = Const.DATA.KEY_USER;
+            return set(key, user);
+        }
+        function setItemType(type) {
+            var key = Const.ITEMS.type;
+            return set(key, type);
+        };
+        function getItemType() {
+            var key = Const.ITEMS.type;
+            return get(key);
+        };
+        function setItemBrand(brand) {
+            var key = Const.ITEMS.brand;
+            return set(key, brand);
+        };
+        function getItemBrand() {
+            var key = Const.ITEMS.brand;
+            return get(key);
+        };
+        function setItemShop(shop) {
+            var key = Const.ITEMS.shop;
+            return set(key, shop);
+        };
+        function getItemShop() {
+            var key = Const.ITEMS.shop;
+            return get(key);
+        };
+        function setItemFirstCate(firstCate) {
+            var key = Const.ITEMS.firstCate;
+            return set(key, firstCate);
+        };
+        function getItemFirstCate() {
+            var key = Const.ITEMS.firstCate;
+            return get(key);
+        };
+        function setItemSecondCate(secondCate) {
+            var key = Const.ITEMS.secondCate;
+            return set(key, secondCate);
+        };
+        function getItemSecondCate() {
+            var key = Const.ITEMS.secondCate;
+            return get(key);
+        };
+        function setIndexTabType(tabId) {
+            var key = Const.INDEX.tabId;
+            return set(key, tabId);
+        };
+        function getIndexTabType() {
+            var key = Const.INDEX.tabId;
+            return get(key);
+        };
+        function setIndexModuleType(moduleId) {
+            var key = Const.INDEX.moduleId;
+            return set(key, moduleId);
+        };
+        function getIndexModuleType() {
+            var key = Const.INDEX.moduleId;
+            return get(key);
+        };
+        function setIndexLayoutType(layoutTypeId) {
+            var key = Const.INDEX.layoutTypeId;
+            return set(key, layoutTypeId);
+        };
+        function getIndexLayoutType() {
+            var key = Const.INDEX.layoutTypeId;
+            return get(key);
+        };
+        function setOrderStatus(orderStatus) {
+            var key = Const.TRADE.orderStatus;
+            return set(key, orderStatus);
+        };
+        function getOrderStatus() {
+            var key = Const.TRADE.orderStatus;
+            return get(key);
+        };
+        function setOrderIndex(orderIndex) {
+            var key = Const.TRADE.orderIndex;
+            return set(key, orderIndex);
+        };
+        function getOrderIndex() {
+            var key = Const.TRADE.orderIndex;
+            return get(key);
+        };
+        function setOrderInfos(orderInfos) {
+            var key = Const.TRADE.orderInfos;
+            return set(key, orderInfos);
+        };
+        function getOrderInfos() {
+            var key = Const.TRADE.orderInfos;
+            return get(key);
+        };
+        function setOrderdetailSetOrderOfficial(officialInfos) {
+            var key = Const.TRADE.officialInfos;
+            return set(key, officialInfos);
+        };
+        function getOrderdetailSetOrderOfficial() {
+            var key = Const.TRADE.officialInfos;
+            return get(key);
+        };
+        function setKeywordType(type) {
+            var key = Const.KEYWORD.type;
+            return set(key, type);
+        };
+        function getKeywordType() {
+            var key = Const.KEYWORD.type;
+            return get(key);
+        };
+
+        function setTinymceBody(body) {
+            var key = Const.community.tinymceBody;
+            return set(key, body);
+        };
+
+        function getTinymceBody() {
+            var key = Const.community.tinymceBody;
+            return get(key);
+        }
+
+    }
+})();
 /**
  * Created by dd on 12/26/15.
  */
@@ -1128,9 +1416,10 @@
         .factory('Api', ['$http', '$q', 'Data', 'Notification', Api]);
 
     function Api($http, $q, Data, Notification) {
+        var url = 'http://yueqingfang.cn/markdown';
         var apiList = {//所有接口list
-            Common:{
-                getSimpleItemInfo:"/item/simple_share_list_by_ids.html",//获取
+            User:{
+                list:url + "/php/conn.php",//获取
             },
         };
 
@@ -1221,87 +1510,6 @@
     }
 })();
 /**
- * 常量定义的factory
- */
-
-(function () {
-    angular
-        .module('app.core')
-        .factory('Const', Const);
-
-    function Const() {
-        return {
-            //******
-
-
-            // style="max-width: 50px; max-height: 30px;" class="gridpadding" ng-mousemove="grid.appScope.onMouseMove($event)" ng-mouseenter="grid.appScope.onMouseEnter(row.entity)" ng-mouseleave="grid.appScope.onMouseLeave(row.entity)"
-            DATA: {
-                KEY_USER: 'user-info',
-                KEY_PREFIX: 'px.user.data.',
-                KEY_TOKEN: 'token',
-            },
-            ITEMS :{
-                type:'type',
-                shop:'shop',
-                brand:'shop',
-                firstCate:'firstCate',
-                secondCate:'secondCate'
-            },
-            INDEX :{
-                tabId:'tabId',
-                moduleId:'moduleId',
-                layoutTypeId:'layoutTypeId'
-            },
-            TRADE :{
-                orderStatus:'orderStatus',
-                orderIndex:'orderIndex',
-                orderInfos:'orderInfos',
-                officialInfos:'officialInfos'
-            },
-
-            KEYWORD : {
-                type: 'keyword-type',
-            },
-            community: {
-                tinymceBody:'tinymce-body'
-            },
-
-            Error: {
-                unKnow: 1001,
-                system: 1002,
-                updateSql: 1003,
-                insertSql: 1004,
-                upload: 1005,
-                unLogin: 2001,
-                paramMiss: 2002,
-                paramError: 2003,
-                userName: 2004,
-                userPassword: 2005,
-                loginError: 2006,
-                labelError: 2007,
-                packageUnOut: 2008,
-                packageNotExist: 2009,
-                orderNotExist: 2010,
-                samePassword: 2011,
-                errorPassword: 2012,
-                packageOut: 2013,
-                packageItemUpdate: 2014,
-                newPackageIn: 2015,
-                packageItemNotExist: 2016,
-                packageItemNum: 2017,
-                orderCancel: 2018,
-                bindPackageFail: 2019,
-                packageAlreadyOut: 2020,
-                codeValidate: 2022
-            },
-            ImgUrl: '/item/upload_image.html',
-            TextFile: '/idcard/photo/upload.json',
-            ImgPrefix: '/idcard/photo/',
-            QiNiu: 'http://static.ipingxing.com/'
-        }
-    }
-})();
-/**
  * 便捷声明方式
  */
 (function () {
@@ -1309,7 +1517,7 @@
         .module('app.core')
         .config(['NotificationProvider', configNotification])
         // .factory('Core', ['$rootScope', '$window', '$document', '$timeout', '$interval','$filter','$q', '$state','$compile','Foundation', 'Api', 'Const', 'Data','$uibModal','Upload','Notification','Util','mouseEventPosition',Core]);
-        .factory('Core', ['$rootScope','Notification','Upload','$uibModal','Util',Core]);
+        .factory('Core', ['$rootScope','Notification','Upload','$uibModal','Util','Api',Core]);
     function configNotification(NotificationProvider) {
         NotificationProvider.setOptions({
             delay: 2500,
@@ -1322,7 +1530,7 @@
         });
     }
 
-    function Core($rootScope,Notification,Upload,$uibModal,Util) {
+    function Core($rootScope,Notification,Upload,$uibModal,Util,Api) {
         console.log("测试下");
         console.log($rootScope);
         // console.log($window);
@@ -1356,7 +1564,7 @@
             // $q: $q,
             // $state: $state,
             // $compile:$compile,
-            // Api: Api,
+            Api: Api,
             // Const: Const,
             // Data: Data,
             $uibModal:$uibModal,
@@ -1380,213 +1588,6 @@
     }
 })();
 
-/**
- * 本地数据调用的factory
- */
-(function () {
-    angular
-        .module('app.core')
-        .factory('Data', ['localStorageService', 'Const', Data]);
-
-    function Data(localStorageService, Const) {
-        return {
-            getUser: getUser,
-            setUser: setUser,
-            getToken: getToken,
-            setToken: setToken,
-            get: get,
-            set: set,
-            clearLocalData: clearLocalData,
-            setItemType:setItemType,
-            getItemType:getItemType,
-            setItemBrand:setItemBrand,
-            getItemBrand:getItemBrand,
-            setItemShop:setItemShop,
-            getItemShop:getItemShop,
-            setItemFirstCate:setItemFirstCate,
-            getItemFirstCate:getItemFirstCate,
-            setItemSecondCate:setItemSecondCate,
-            getItemSecondCate:getItemSecondCate,
-            setIndexTabType:setIndexTabType,
-            getIndexTabType:getIndexTabType,
-            setIndexModuleType:setIndexModuleType,
-            getIndexModuleType:getIndexModuleType,
-            setIndexLayoutType:setIndexLayoutType,
-            getIndexLayoutType:getIndexLayoutType,
-            setOrderStatus:setOrderStatus,
-            getOrderStatus:getOrderStatus,
-            setOrderIndex:setOrderIndex,
-            getOrderIndex:getOrderIndex,
-            setOrderInfos:setOrderInfos,
-            getOrderInfos:getOrderInfos,
-            setOrderdetailSetOrderOfficial:setOrderdetailSetOrderOfficial,
-            getOrderdetailSetOrderOfficial:getOrderdetailSetOrderOfficial,
-            setKeywordType:setKeywordType,
-            getKeywordType:getKeywordType,
-            setTinymceBody: setTinymceBody,
-            getTinymceBody: getTinymceBody,
-
-
-        };
-
-        function clearLocalData() {
-            localStorageService.clearAll();
-        }
-
-        function getKey(key) {
-            return Const.DATA.KEY_PREFIX + key;
-        }
-
-        function removeKey(key) {
-            localStorageService.removeItem(key);
-        }
-
-        function get(key) {
-            key = getKey(key);
-            return localStorageService.get(key);
-        }
-
-        function set(key, val) {
-            key = getKey(key);
-            return localStorageService.set(key, val);
-        }
-
-        function getToken() {
-            var key = Const.DATA.KEY_TOKEN;
-            return get(key);
-        }
-
-        function setToken(token) {
-            var key = Const.DATA.KEY_TOKEN;
-            set(key, token);
-        }
-
-        function getUser() {
-            var key = Const.DATA.KEY_USER;
-            return get(key);
-        }
-
-        function setUser(user) {
-            var key = Const.DATA.KEY_USER;
-            return set(key, user);
-        }
-        function setItemType(type) {
-            var key = Const.ITEMS.type;
-            return set(key, type);
-        };
-        function getItemType() {
-            var key = Const.ITEMS.type;
-            return get(key);
-        };
-        function setItemBrand(brand) {
-            var key = Const.ITEMS.brand;
-            return set(key, brand);
-        };
-        function getItemBrand() {
-            var key = Const.ITEMS.brand;
-            return get(key);
-        };
-        function setItemShop(shop) {
-            var key = Const.ITEMS.shop;
-            return set(key, shop);
-        };
-        function getItemShop() {
-            var key = Const.ITEMS.shop;
-            return get(key);
-        };
-        function setItemFirstCate(firstCate) {
-            var key = Const.ITEMS.firstCate;
-            return set(key, firstCate);
-        };
-        function getItemFirstCate() {
-            var key = Const.ITEMS.firstCate;
-            return get(key);
-        };
-        function setItemSecondCate(secondCate) {
-            var key = Const.ITEMS.secondCate;
-            return set(key, secondCate);
-        };
-        function getItemSecondCate() {
-            var key = Const.ITEMS.secondCate;
-            return get(key);
-        };
-        function setIndexTabType(tabId) {
-            var key = Const.INDEX.tabId;
-            return set(key, tabId);
-        };
-        function getIndexTabType() {
-            var key = Const.INDEX.tabId;
-            return get(key);
-        };
-        function setIndexModuleType(moduleId) {
-            var key = Const.INDEX.moduleId;
-            return set(key, moduleId);
-        };
-        function getIndexModuleType() {
-            var key = Const.INDEX.moduleId;
-            return get(key);
-        };
-        function setIndexLayoutType(layoutTypeId) {
-            var key = Const.INDEX.layoutTypeId;
-            return set(key, layoutTypeId);
-        };
-        function getIndexLayoutType() {
-            var key = Const.INDEX.layoutTypeId;
-            return get(key);
-        };
-        function setOrderStatus(orderStatus) {
-            var key = Const.TRADE.orderStatus;
-            return set(key, orderStatus);
-        };
-        function getOrderStatus() {
-            var key = Const.TRADE.orderStatus;
-            return get(key);
-        };
-        function setOrderIndex(orderIndex) {
-            var key = Const.TRADE.orderIndex;
-            return set(key, orderIndex);
-        };
-        function getOrderIndex() {
-            var key = Const.TRADE.orderIndex;
-            return get(key);
-        };
-        function setOrderInfos(orderInfos) {
-            var key = Const.TRADE.orderInfos;
-            return set(key, orderInfos);
-        };
-        function getOrderInfos() {
-            var key = Const.TRADE.orderInfos;
-            return get(key);
-        };
-        function setOrderdetailSetOrderOfficial(officialInfos) {
-            var key = Const.TRADE.officialInfos;
-            return set(key, officialInfos);
-        };
-        function getOrderdetailSetOrderOfficial() {
-            var key = Const.TRADE.officialInfos;
-            return get(key);
-        };
-        function setKeywordType(type) {
-            var key = Const.KEYWORD.type;
-            return set(key, type);
-        };
-        function getKeywordType() {
-            var key = Const.KEYWORD.type;
-            return get(key);
-        };
-
-        function setTinymceBody(body) {
-            var key = Const.community.tinymceBody;
-            return set(key, body);
-        };
-
-        function getTinymceBody() {
-            var key = Const.community.tinymceBody;
-            return get(key);
-        }
-
-    }
-})();
 (function () {//自定义指令
 
     var appModule = angular.module('app.core');
