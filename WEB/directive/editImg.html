@@ -1,0 +1,26 @@
+<div class="container-cropper">
+    <div class="form-wrap form-a-box">
+        <a class="link-color" ng-class="{'active':config.isFg}" ng-click="switchover(1)" href="javascript:;">正面</a>
+        <a class="link-color" ng-class="{'active':!config.isFg}" ng-click="switchover(0)" href="javascript:;">背面</a>
+    </div>
+    <div class="form-wrap">
+        <div class="img-container">
+            <img id="image" alt="Picture">
+        </div>
+    </div>
+    <div class="form-wrap">
+        <button type="button" class="btn btn-primary" ng-click="rotate(-45)">向左旋转</button>
+        <button type="button" class="btn btn-primary" ng-click="rotate(45)">向右旋转</button>
+        <button type="button" class="btn btn-primary" ng-click="scaleX()">左右变换</button>
+        <button type="button" class="btn btn-primary" ng-click="scaleY()">上下变换</button>
+    </div>
+
+    <div class="form-wrap">
+        <input class="to-rotate" type="range" min="0" max="360" value="0" ng-model="rotateValue" ng-change="toRotate(rotateValue)">
+    </div>
+    <div class="form-wrap docs-buttons">
+        <button class="btn btn-primary" id="inputImage" ngf-select="change($file)" accept="image/jpg,image/jpeg,image/png,image/gif">替换新图</button>
+        <button type="button" class="btn btn-primary" data-method="reset" title="Reset">初始化</button>
+        <button type="button" class="btn btn-primary"  data-method="getCroppedCanvas">裁剪上传</button>
+    </div>
+</div>

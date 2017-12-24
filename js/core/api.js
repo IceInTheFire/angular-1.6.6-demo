@@ -16,8 +16,9 @@
         var url = 'http://yueqingfang.cn/markdown';
         var apiList = {//所有接口list
             User:{
-                list:url + "/php/conn.php",//获取
+                list:url + '/php/conn.php',//获取
             },
+            upload:url+'/php/imgUpload_batch.php'
         };
 
         var api = {};//定义一个空对象api

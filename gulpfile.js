@@ -347,6 +347,7 @@ gulp.task("build-node-js", function() {
         './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
         './node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
         './node_modules/angular-local-storage/dist/angular-local-storage.min.js',   //本地缓存
+        // './node_modules/cropper/dist/cropper.min.js',
         // './node_modules/angular-sortable-view/angular-sortable-view.js',
         // './node_modules/video.js/dist/video.min.js',
         // './node_modules/flv.js/dist/flv.min.js',
