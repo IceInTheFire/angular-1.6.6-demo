@@ -1,19 +1,56 @@
 (function () {//自定义指令
 
-    var appModule = angular.module('app.core');
-
-    appModule.directive('loading',loadingController);
-    appModule.directive('ngEnter',['$parse',ngEnterController]);
-    appModule.directive('timepicker',['$timeout',timepicker]);
-    
-
-    appModule.directive('dblFocus',['$timeout',dblFocus]);
-    appModule.directive('onRepeatFinishedRender', ['$timeout', repeatFinished]);
-    appModule.directive('dblFocus',['$timeout',dblFocus]);
-    appModule.directive('imgEdit', ['$rootScope', '$q', 'Upload','Core', imgEdit]);
+    var app = angular.module('app.core');
+    app.directive('page', pageController);
+    app.directive('loading',loadingController);
+    app.directive('ngEnter',['$parse',ngEnterController]);
+    app.directive('timepicker',['$timeout',timepicker]);
 
 
+    app.directive('dblFocus',['$timeout',dblFocus]);
+    app.directive('onRepeatFinishedRender', ['$timeout', repeatFinished]);
+    app.directive('dblFocus',['$timeout',dblFocus]);
+    app.directive('imgEdit', ['$rootScope', '$q', 'Upload','Core', imgEdit]);
 
+
+    function pageController() {
+        return {
+            restrict: 'AE',
+            templateUrl: './WEB/directive/page.html',
+            scope: {
+                pageCount: '=',
+                onClickPage: '&'
+            },
+            link: function (scope, elem, attrs, c) {
+                var context = scope;
+                context.onClickPrev = onClickPrev;
+                context.onClickNext = onClickNext;
+                context.onClickPageNumber = onClickPageNumber;
+                !function init() {
+                    context.pageNumber = 1;
+                }();
+
+                function onClickPageNumber(pageNumber) {
+                    context.onClickPage({page: pageNumber});
+                    context.pageNumber = pageNumber;
+                }
+
+                function onClickPrev() {
+                    if(context.pageNumber > 0) {
+                        context.pageNumber -= 1;
+                    }
+                    context.onClickPage({page: context.pageNumber});
+                }
+
+                function onClickNext() {
+                    if (context.pageNumber < context.pageCount) {
+                        context.pageNumber += 1;
+                    }
+                    context.onClickPage({page: context.pageNumber});
+                }
+            }
+        };
+    }
 
     function loadingController() {//等待动画
         return {

@@ -417,6 +417,7 @@ img {
   color: #8c8c8c;
 }
 
+
 .container-cropper .link-color.active {
   color: red;
 }
@@ -538,3 +539,30 @@ img {
   }
 }
 
+.page-holder {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 20px;
+  margin-right: 20px;
+  float: right;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.page,
+.prev,
+.next,
+.total-page {
+  color: #616161;
+  padding: 0 6px;
+  cursor: pointer;
+}
+.green {
+  color: #0A9908;
+}
+.page-num {
+  display: inline;
+}

@@ -13,7 +13,16 @@
           </tr>
       </tbody>
       <!--<tfoot></tfoot>-->
+      <tfoot>
+      <tr>
+          <td colspan="2" ng-show='!data.length&&!loading' style="text-align: center;">暂无数据</td>
+          <!--<td colspan="2" ng-show='data.length' style="text-align: right;">-->
+              <!--数据-->
+          <!--</td>-->
+      </tr>
+      </tfoot>
   </table>
+    <page page-count="totalPage" on-click-page="refreshTable(page)"></page>
 </div>
 <loading is-show="loading"></loading>
 

@@ -7,17 +7,30 @@
     function HomeController($scope, Core) {
         var context = $scope;
         console.log("账号管理");
-        context.loading = true;
-        Core.Api.NormalApi.User.list({}).then(function(response) {
-            context.data = response.model.dataList;
-            context.loading = false;
-        },function(err) {
-            context.loading = false;
-        });
-        // Core.Api.User.list({}).then(function(response){
-        //
-        // },function(error) {
-        //
-        // });
+
+        context.refreshTable = refreshTable;
+
+        init();
+
+        function init(){
+            context.params = {
+                page:1,
+                limit:10
+            };
+            refreshTable();
+        }
+
+        function refreshTable(page){
+            console.log(page);
+            context.params.page = page || 1;
+            context.loading = true;
+            Core.Api.NormalApi.User.list(context.params).then(function(response) {
+                context.totalPage = response.model.totalPage;
+                context.data = response.model.dataList;
+                context.loading = false;
+            },function(err) {
+                context.loading = false;
+            });
+        }
     }
 })();

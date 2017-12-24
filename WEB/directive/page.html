@@ -1,0 +1,12 @@
+<div class="page-holder" ng-show="pageCount">
+    <span class="prev" ng-if="pageNumber != 1" ng-click="onClickPrev()">&lt;</span>
+    <div class="page-num">
+        <span class="page" ng-show="pageNumber-2 >= 1" ng-click="onClickPageNumber(pageNumber-2)">{{pageNumber-2}}</span>
+        <span class="page" ng-show="pageNumber-1 >= 1" ng-click="onClickPageNumber(pageNumber-1)">{{pageNumber-1}}</span>
+        <span class="page green" ng-click="onClickPageNumber(pageNumber)">{{pageNumber}}</span>
+        <span class="page" ng-show="pageNumber+1 <= pageCount" ng-click="onClickPageNumber(pageNumber+1)">{{pageNumber+1}}</span>
+        <span class="page" ng-show="pageNumber+2 <= pageCount" ng-click="onClickPageNumber(pageNumber+2)">{{pageNumber+2}}</span>
+    </div>
+    <span class="next" ng-if="pageNumber != pageCount" ng-click="onClickNext()">&gt;</span>
+    <span class="total-page m-default">共 {{pageCount}} 页</span>
+</div>
