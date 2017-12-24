@@ -10,9 +10,9 @@
 (function () {
     angular
         .module('app.core')
-        .factory('Api', ['$http', '$q', 'Data', 'Notification', Api]);
+        .factory('Api', ['$rootScope','$http', '$q', 'Data', 'Notification', Api]);
 
-    function Api($http, $q, Data, Notification) {
+    function Api($rootScope, $http, $q, Data, Notification) {
         var url = 'http://yueqingfang.cn/markdown';
         var apiList = {//所有接口list
             User:{
@@ -59,6 +59,7 @@
 
         function post(api, data) {
             var url = api;
+            $rootScope.loading = true;
             return $http({
                 method: 'POST',
                 url: url,
@@ -66,6 +67,7 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
             }).then(function (response) {
                 response = response.data ? response.data : response;
+                $rootScope.loading = false;
                 if(response.code!='success') {
                     Notification.error(response.message);
                 }
@@ -75,6 +77,7 @@
                 return $q.reject(response);
             }, function (reason) {
                 console.log(reason);
+                $rootScope.loading = false;
                 // Notification.error(reason.data.message);
                 if(reason.data && reason.data.message) {
                     Notification.error(reason.data.message);
@@ -91,16 +94,19 @@
         function get(url, data) { //调用api,http请求
             var token = Data.getToken();//获取token
             token = token ? token : '';
+            $rootScope.loading = true;
             return $http({
                 dataType: "json",
                 method: "GET",
                 params: data,
                 url: url
             }).then(function (response) {//回调函数
+                $rootScope.loading = false;
                 var response = response.data;
                 Notification.error(response.data.message);
                 return $q.reject();
             }, function (reason) {
+                $rootScope.loading = false;
                 Notification.error('网络异常');
             });
         }

@@ -23,13 +23,10 @@
         function refreshTable(page){
             console.log(page);
             context.params.page = page || 1;
-            context.loading = true;
             Core.Api.NormalApi.User.list(context.params).then(function(response) {
                 context.totalPage = response.model.totalPage;
                 context.data = response.model.dataList;
-                context.loading = false;
             },function(err) {
-                context.loading = false;
             });
         }
     }

@@ -13,15 +13,13 @@
     function mainController($scope, $rootScope, $state,Core) {
         // $scope.$state = Core.$state;
         var context = $scope;
+        context.$state = $state;
         context.onClickExit = onClickExit;
 
+        $rootScope.loading = false;
         context.userData = {
             userName:'冰中焱',
         }
-
-        $scope.$state = $state;
-        var context = $scope;
-        // console.log($state);
 
 
 

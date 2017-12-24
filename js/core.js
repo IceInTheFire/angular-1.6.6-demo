@@ -1,393 +1,3 @@
-(function() {
-    var app = angular.module('app',[
-        'ui.router',
-        'oc.lazyLoad',
-        'app.core',
-        'ngFileUpload',
-        'ui.bootstrap',     //模态框
-        'angular-sortable-view'
-    ]);
-
-    app.controller('mainController', ['$scope', '$rootScope', '$state','Core', mainController]);
-
-    function mainController($scope, $rootScope, $state,Core) {
-        // $scope.$state = Core.$state;
-        var context = $scope;
-        context.onClickExit = onClickExit;
-
-        context.userData = {
-            userName:'冰中焱',
-        }
-
-        $scope.$state = $state;
-        var context = $scope;
-        // console.log($state);
-
-
-
-        function onClickExit() {
-            console.log('退出登录');
-            // Core.Api.normalApi.Logout.logout().then(function(){
-            //     location.href="/admin.html";
-            // });
-        }
-
-        // Core.Api.normalApi.Auth.getAdminUser().then(function(response) {
-        //     context.userData = response.data;
-        // },function(error){
-        //
-        // })
-        var lazyLoad = {
-            cache: {},
-            deferred: function (self) {
-                return self.all ? self.defer() : $.Deferred()
-            },
-            promise: function (self, deferred) {
-                return self.all ? deferred.promise : deferred.promise()
-            },
-            when: function (self, deferredList) {
-                return self.all ? self.all(deferredList) : $.when.apply($, deferredList)
-            },
-            css: function (path) {
-
-                var self = this,
-                    cache = lazyLoad.cache,
-                    deferred = lazyLoad.deferred(self),
-                    deferredList = [],
-                    callback,
-                    preload,
-                    $ua = navigator.userAgent;
-
-                if (typeof arguments[1] === 'boolean') {
-                    callback = arguments[2];
-                    preload = arguments[1];
-                } else {
-                    callback = arguments[1];
-                    preload = arguments[2];
-                }
-
-                angular.forEach(path instanceof Array ? path : [path], function (url, deferred, element) {
-                    deferred = cache[url] || lazyLoad.deferred(self);
-                    deferredList.push(lazyLoad.promise(self, deferred));
-                    if (!cache[url]) {
-                        element = document.createElement('link');
-                        element.rel = 'stylesheet';
-                        if (preload) {
-                            cache[url] = deferred
-                        } else {
-                            element.className = 'lazyLoad-stylesheet'
-                        }
-                        if (/(?:Android);?[\s\/]+([\d.]+)?/i.test($ua) || /(?:iPad|iPod|iPhone).*OS\s([\d_]+)/i.test($ua)) {
-                            (function poll(count, loaded) {
-                                if (/webkit/i.test($ua)) {
-                                    if (element.sheet) {
-                                        loaded = true
-                                    }
-                                } else if (element.sheet) {
-                                    try {
-                                        if (element.sheet.cssRules) {
-                                            loaded = true
-                                        }
-                                    } catch (ex) {
-                                        if (ex.name === 'SecurityError' || ex.code === 1000) {
-                                            loaded = true
-                                        }
-                                    }
-                                }
-                                if (loaded || (count >= 200)) {
-                                    deferred.resolve()
-                                } else {
-                                    setTimeout(function () {
-                                        poll(count + 1)
-                                    }, 10)
-                                }
-                            }(0))
-                        } else {
-                            element[document.addEventListener ? 'onload' : 'onreadystatechange'] = function (_, isAbort) {
-                                if (isAbort || !element.readyState || /loaded|complete/.test(element.readyState)) {
-                                    deferred.resolve()
-                                }
-                            }
-                        }
-                        element.onerror = function () {
-                            deferred.reject(url)
-                        };
-                        element.setAttribute('charset', 'utf-8');
-                        element.setAttribute('type', 'text/css');
-                        element.href = url;
-                        (document.head || document.getElementsByTagName('head')[0]).appendChild(element);
-                    }
-                });
-
-                lazyLoad.when(self, deferredList).then(function () {
-                    setTimeout(callback || angular.noop);
-                    deferred.resolve();
-                }, function () {
-                    deferred.reject();
-                    console.error('lazyLoad-css-error:', arguments[0]);
-                });
-
-                return lazyLoad.promise(self, deferred);
-            },
-            js: function (path) {
-
-                var self = this,
-                    cache = lazyLoad.cache,
-                    deferred = lazyLoad.deferred(self),
-                    deferredList = [],
-                    loadList = [],
-                    boolean = typeof arguments[1] === 'boolean',
-                    callback = boolean ? false : arguments[1],
-                    timestamp = boolean && !arguments[1] ? '' : '?_' + (Date.parse(new Date()) / 1000);
-
-                angular.forEach(path instanceof Array ? path : [path], function (url, deferred, element) {
-                    deferred = cache[url] || lazyLoad.deferred(self);
-                    deferredList.push(lazyLoad.promise(self, deferred));
-                    if (!cache[url]) {
-                        cache[url] = deferred;
-                        loadList.push(url);
-                    }
-                });
-
-                (function load(index, element, url) {
-                    if (url = loadList[index]) {
-                        element = document.createElement('script');
-                        element[document.addEventListener ? 'onload' : 'onreadystatechange'] = function (_, isAbort) {
-                            if (isAbort || !element.readyState || /loaded|complete/.test(element.readyState)) {
-                                document.body.removeChild(element);
-                                cache[url].resolve();
-                                load(index + 1);
-                            }
-                        };
-                        element.onerror = function () {
-                            cache[url].reject(url);
-                            load(index + 1);
-                        };
-                        element.setAttribute('charset', 'utf-8');
-                        element.src = url + (!/\/(\d(\.\d+)+)\//.test(url) && !/\.js\?/.test(url) && /\.js$/.test(url) ? timestamp : '');
-                        document.body.appendChild(element);
-                    }
-                }(0));
-
-                lazyLoad.when(self, deferredList).then(function () {
-                    !boolean && setTimeout(callback || angular.noop);
-                    deferred.resolve();
-                }, function () {
-                    deferred.reject();
-                    console.error('lazyLoad-js-error:', arguments[0]);
-                });
-
-                return lazyLoad.promise(self, deferred);
-            }
-        };
-        $rootScope.lazyLoad = lazyLoad;
-    }
-
-})();
-
-
-
-(function() {
-    console.log("app.config");
-
-
-
-    angular.module('app')
-        .config(['$stateProvider', '$urlRouterProvider','$ocLazyLoadProvider', configRoute])
-        // .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider' , configRoute])
-        // .config(configRoute)
-        .config(['$locationProvider', configSce])
-        // .config(configSce)
-        // .run(runCore)
-        .run(['$rootScope','$state','$ocLazyLoad', runCore]);
-
-
-    function configRoute($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
-        $urlRouterProvider.otherwise('/welcome/welcome');
-
-        $ocLazyLoadProvider.config({
-            // Set to true if you want to see what and when is dynamically loaded
-            debug: false
-        });
-
-        var isProd = window.an.isProd; //是否是发布版本
-        var apps = ["welcome","angularTool","user"];
-
-        var dictionary = [];
-        var jsJson;
-        var cssJson;
-        if (isProd) {
-
-            jsJson = {};
-            cssJson = {};
-            var jsStr = '/template.min.js';
-            var cssStr = '/template.min.css';
-
-            jsJson['welcome' + jsStr] = 'welcome/template.min.js';
-            cssJson['welcome' + cssStr] = 'welcome/template.min.css';
-            jsJson['angularTool' + jsStr] = 'angularTool/template.min.js';
-            cssJson['angularTool' + cssStr] = 'angularTool/template.min.css';
-            jsJson['user' + jsStr] = 'user/template.min.js';
-            cssJson['user' + cssStr] = 'user/template.min.css';
-
-
-            angular.forEach(apps, function(data, index, array) {
-                var item = {};
-                item.name = data;
-                item.serie = true;
-                item.files = [];
-                var cssString = cssJson[data + cssStr];
-                item.files.push('./css/app/' + cssString);
-                var jsString = jsJson[data + jsStr];
-                item.files.push(('./js/app/' + jsString));
-                dictionary.push(item);
-            });
-
-            $ocLazyLoadProvider.config({
-                modules: dictionary
-            });
-            init();
-        }
-        else {
-            angular.forEach(apps, function (data, index, array) {
-                var item = {};
-                item.name = data;
-                item.serie = true;
-                item.files = [];
-                var cssString = data + '/template.css';
-                item.files.push('./css/app/' + cssString);
-                var jsString = data + '/template.js';
-                item.files.push(('./js/app/' + jsString));
-                dictionary.push(item);
-            });
-            $ocLazyLoadProvider.config({
-                modules: dictionary
-            });
-            init();
-        }
-
-        function init() {
-            $stateProvider
-                .state('welcome', {
-                    url: '/welcome',
-                    templateUrl: 'WEB/bar/nav.html',
-                    // templateUrl: 'WEB/bar/nav2.html',
-                    resolve: {
-                        store: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load('welcome')
-                        }]
-                    }
-                })
-                .state('welcome.welcome', {
-                    url: '/welcome',
-                    templateUrl: 'WEB/app/welcome/welcome.html',
-                    controller: 'welcome.welcomeController'
-                })
-                .state('angularTool', {
-                    url: '/angularTool',
-                    templateUrl: 'WEB/bar/nav.html',
-                    // templateUrl: 'WEB/bar/nav2.html',
-                    resolve: {
-                        store: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load('angularTool')
-                        }]
-                    }
-                })
-                .state('angularTool.tinymce', {
-                    url: '/tinymce',
-                    templateUrl: 'WEB/app/angularTool/tinymce.html',
-                    controller: 'angularTool.tinymceController'
-                })
-                .state('angularTool.modal', {
-                    url: '/modal',
-                    templateUrl: 'WEB/app/angularTool/modal.html',
-                    controller: 'angularTool.modalController'
-                })
-                .state('angularTool.notification', {
-                    url: '/notification',
-                    templateUrl: 'WEB/app/angularTool/notification.html',
-                    controller: 'angularTool.notificationController'
-                })
-                .state('angularTool.drag', {
-                    url: '/drag',
-                    templateUrl: 'WEB/app/angularTool/drag.html',
-                    controller: 'angularTool.dragController'
-                })
-                .state('angularTool.cropper', {
-                    url: '/cropper',
-                    templateUrl: 'WEB/app/angularTool/cropper.html',
-                    controller: 'angularTool.cropperController'
-                })
-                .state('angularTool.upload', {
-                    url: '/upload',
-                    templateUrl: 'WEB/app/angularTool/upload.html',
-                    controller: 'angularTool.uploadController'
-                })
-                .state('angularTool.time', {
-                    url: '/time',
-                    templateUrl: 'WEB/app/angularTool/time.html',
-                    controller: 'angularTool.timeController'
-                })
-                /*
-                * 用户信息
-                * */
-                .state('user', {
-                    url: '/user',
-                    templateUrl: 'WEB/bar/nav.html',
-                    // templateUrl: 'WEB/bar/nav2.html',
-                    resolve: {
-                        store: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load('user')
-                        }]
-                    }
-                })
-                .state('user.list', {
-                    url: '/list',
-                    templateUrl: 'WEB/app/user/list.html',
-                    controller: 'user.listController'
-                })
-        }
-
-
-    }
-
-    function configSce($locationProvider) {
-        $locationProvider.hashPrefix(''); //去掉angular-ui-router新版本里的!
-        //$locationProvider.html5Mode(true);
-    }
-
-    function runCore($rootScope, $state, $ocLazyLoad, Core) {
-        $rootScope.$state = $state;
-    }
-})();
-(function () {
-    angular
-        .module('app')
-        .controller('dialog.confirm', ['$scope', 'Core', '$uibModalInstance','params',HomeController]);
-
-    function HomeController($scope, Core, $uibModalInstance,params){
-
-        var context = $scope;
-
-        context.onClickOk = onClickOk;
-        context.onClickCancel= onClickCancel;
-
-        init();
-        function init() {
-            context.params = params;
-            context.params.header = context.params.header || '确认框';
-            // context.loading = true;
-        }
-
-        function onClickOk() {
-            $uibModalInstance.close('确认');
-        }
-
-        function onClickCancel() {
-            $uibModalInstance.dismiss('取消');
-        }
-    }
-}());
 /*
 * 一切的开始
 * */
@@ -1803,9 +1413,9 @@
 (function () {
     angular
         .module('app.core')
-        .factory('Api', ['$http', '$q', 'Data', 'Notification', Api]);
+        .factory('Api', ['$rootScope','$http', '$q', 'Data', 'Notification', Api]);
 
-    function Api($http, $q, Data, Notification) {
+    function Api($rootScope, $http, $q, Data, Notification) {
         var url = 'http://yueqingfang.cn/markdown';
         var apiList = {//所有接口list
             User:{
@@ -1852,6 +1462,7 @@
 
         function post(api, data) {
             var url = api;
+            $rootScope.loading = true;
             return $http({
                 method: 'POST',
                 url: url,
@@ -1859,6 +1470,7 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
             }).then(function (response) {
                 response = response.data ? response.data : response;
+                $rootScope.loading = false;
                 if(response.code!='success') {
                     Notification.error(response.message);
                 }
@@ -1868,6 +1480,7 @@
                 return $q.reject(response);
             }, function (reason) {
                 console.log(reason);
+                $rootScope.loading = false;
                 // Notification.error(reason.data.message);
                 if(reason.data && reason.data.message) {
                     Notification.error(reason.data.message);
@@ -1884,16 +1497,19 @@
         function get(url, data) { //调用api,http请求
             var token = Data.getToken();//获取token
             token = token ? token : '';
+            $rootScope.loading = true;
             return $http({
                 dataType: "json",
                 method: "GET",
                 params: data,
                 url: url
             }).then(function (response) {//回调函数
+                $rootScope.loading = false;
                 var response = response.data;
                 Notification.error(response.data.message);
                 return $q.reject();
             }, function (reason) {
+                $rootScope.loading = false;
                 Notification.error('网络异常');
             });
         }
@@ -2820,3 +2436,391 @@
         }
     }
 })();
+(function() {
+    var app = angular.module('app',[
+        'ui.router',
+        'oc.lazyLoad',
+        'app.core',
+        'ngFileUpload',
+        'ui.bootstrap',     //模态框
+        'angular-sortable-view'
+    ]);
+
+    app.controller('mainController', ['$scope', '$rootScope', '$state','Core', mainController]);
+
+    function mainController($scope, $rootScope, $state,Core) {
+        // $scope.$state = Core.$state;
+        var context = $scope;
+        context.$state = $state;
+        context.onClickExit = onClickExit;
+
+        $rootScope.loading = false;
+        context.userData = {
+            userName:'冰中焱',
+        }
+
+
+
+        function onClickExit() {
+            console.log('退出登录');
+            // Core.Api.normalApi.Logout.logout().then(function(){
+            //     location.href="/admin.html";
+            // });
+        }
+
+        // Core.Api.normalApi.Auth.getAdminUser().then(function(response) {
+        //     context.userData = response.data;
+        // },function(error){
+        //
+        // })
+        var lazyLoad = {
+            cache: {},
+            deferred: function (self) {
+                return self.all ? self.defer() : $.Deferred()
+            },
+            promise: function (self, deferred) {
+                return self.all ? deferred.promise : deferred.promise()
+            },
+            when: function (self, deferredList) {
+                return self.all ? self.all(deferredList) : $.when.apply($, deferredList)
+            },
+            css: function (path) {
+
+                var self = this,
+                    cache = lazyLoad.cache,
+                    deferred = lazyLoad.deferred(self),
+                    deferredList = [],
+                    callback,
+                    preload,
+                    $ua = navigator.userAgent;
+
+                if (typeof arguments[1] === 'boolean') {
+                    callback = arguments[2];
+                    preload = arguments[1];
+                } else {
+                    callback = arguments[1];
+                    preload = arguments[2];
+                }
+
+                angular.forEach(path instanceof Array ? path : [path], function (url, deferred, element) {
+                    deferred = cache[url] || lazyLoad.deferred(self);
+                    deferredList.push(lazyLoad.promise(self, deferred));
+                    if (!cache[url]) {
+                        element = document.createElement('link');
+                        element.rel = 'stylesheet';
+                        if (preload) {
+                            cache[url] = deferred
+                        } else {
+                            element.className = 'lazyLoad-stylesheet'
+                        }
+                        if (/(?:Android);?[\s\/]+([\d.]+)?/i.test($ua) || /(?:iPad|iPod|iPhone).*OS\s([\d_]+)/i.test($ua)) {
+                            (function poll(count, loaded) {
+                                if (/webkit/i.test($ua)) {
+                                    if (element.sheet) {
+                                        loaded = true
+                                    }
+                                } else if (element.sheet) {
+                                    try {
+                                        if (element.sheet.cssRules) {
+                                            loaded = true
+                                        }
+                                    } catch (ex) {
+                                        if (ex.name === 'SecurityError' || ex.code === 1000) {
+                                            loaded = true
+                                        }
+                                    }
+                                }
+                                if (loaded || (count >= 200)) {
+                                    deferred.resolve()
+                                } else {
+                                    setTimeout(function () {
+                                        poll(count + 1)
+                                    }, 10)
+                                }
+                            }(0))
+                        } else {
+                            element[document.addEventListener ? 'onload' : 'onreadystatechange'] = function (_, isAbort) {
+                                if (isAbort || !element.readyState || /loaded|complete/.test(element.readyState)) {
+                                    deferred.resolve()
+                                }
+                            }
+                        }
+                        element.onerror = function () {
+                            deferred.reject(url)
+                        };
+                        element.setAttribute('charset', 'utf-8');
+                        element.setAttribute('type', 'text/css');
+                        element.href = url;
+                        (document.head || document.getElementsByTagName('head')[0]).appendChild(element);
+                    }
+                });
+
+                lazyLoad.when(self, deferredList).then(function () {
+                    setTimeout(callback || angular.noop);
+                    deferred.resolve();
+                }, function () {
+                    deferred.reject();
+                    console.error('lazyLoad-css-error:', arguments[0]);
+                });
+
+                return lazyLoad.promise(self, deferred);
+            },
+            js: function (path) {
+
+                var self = this,
+                    cache = lazyLoad.cache,
+                    deferred = lazyLoad.deferred(self),
+                    deferredList = [],
+                    loadList = [],
+                    boolean = typeof arguments[1] === 'boolean',
+                    callback = boolean ? false : arguments[1],
+                    timestamp = boolean && !arguments[1] ? '' : '?_' + (Date.parse(new Date()) / 1000);
+
+                angular.forEach(path instanceof Array ? path : [path], function (url, deferred, element) {
+                    deferred = cache[url] || lazyLoad.deferred(self);
+                    deferredList.push(lazyLoad.promise(self, deferred));
+                    if (!cache[url]) {
+                        cache[url] = deferred;
+                        loadList.push(url);
+                    }
+                });
+
+                (function load(index, element, url) {
+                    if (url = loadList[index]) {
+                        element = document.createElement('script');
+                        element[document.addEventListener ? 'onload' : 'onreadystatechange'] = function (_, isAbort) {
+                            if (isAbort || !element.readyState || /loaded|complete/.test(element.readyState)) {
+                                document.body.removeChild(element);
+                                cache[url].resolve();
+                                load(index + 1);
+                            }
+                        };
+                        element.onerror = function () {
+                            cache[url].reject(url);
+                            load(index + 1);
+                        };
+                        element.setAttribute('charset', 'utf-8');
+                        element.src = url + (!/\/(\d(\.\d+)+)\//.test(url) && !/\.js\?/.test(url) && /\.js$/.test(url) ? timestamp : '');
+                        document.body.appendChild(element);
+                    }
+                }(0));
+
+                lazyLoad.when(self, deferredList).then(function () {
+                    !boolean && setTimeout(callback || angular.noop);
+                    deferred.resolve();
+                }, function () {
+                    deferred.reject();
+                    console.error('lazyLoad-js-error:', arguments[0]);
+                });
+
+                return lazyLoad.promise(self, deferred);
+            }
+        };
+        $rootScope.lazyLoad = lazyLoad;
+    }
+
+})();
+
+
+
+(function() {
+    console.log("app.config");
+
+
+
+    angular.module('app')
+        .config(['$stateProvider', '$urlRouterProvider','$ocLazyLoadProvider', configRoute])
+        // .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider' , configRoute])
+        // .config(configRoute)
+        .config(['$locationProvider', configSce])
+        // .config(configSce)
+        // .run(runCore)
+        .run(['$rootScope','$state','$ocLazyLoad', runCore]);
+
+
+    function configRoute($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
+        $urlRouterProvider.otherwise('/welcome/welcome');
+
+        $ocLazyLoadProvider.config({
+            // Set to true if you want to see what and when is dynamically loaded
+            debug: false
+        });
+
+        var isProd = window.an.isProd; //是否是发布版本
+        var apps = ["welcome","angularTool","user"];
+
+        var dictionary = [];
+        var jsJson;
+        var cssJson;
+        if (isProd) {
+
+            jsJson = {};
+            cssJson = {};
+            var jsStr = '/template.min.js';
+            var cssStr = '/template.min.css';
+
+            jsJson['welcome' + jsStr] = 'welcome/template.min.js';
+            cssJson['welcome' + cssStr] = 'welcome/template.min.css';
+            jsJson['angularTool' + jsStr] = 'angularTool/template.min.js';
+            cssJson['angularTool' + cssStr] = 'angularTool/template.min.css';
+            jsJson['user' + jsStr] = 'user/template.min.js';
+            cssJson['user' + cssStr] = 'user/template.min.css';
+
+
+            angular.forEach(apps, function(data, index, array) {
+                var item = {};
+                item.name = data;
+                item.serie = true;
+                item.files = [];
+                var cssString = cssJson[data + cssStr];
+                item.files.push('./css/app/' + cssString);
+                var jsString = jsJson[data + jsStr];
+                item.files.push(('./js/app/' + jsString));
+                dictionary.push(item);
+            });
+
+            $ocLazyLoadProvider.config({
+                modules: dictionary
+            });
+            init();
+        }
+        else {
+            angular.forEach(apps, function (data, index, array) {
+                var item = {};
+                item.name = data;
+                item.serie = true;
+                item.files = [];
+                var cssString = data + '/template.css';
+                item.files.push('./css/app/' + cssString);
+                var jsString = data + '/template.js';
+                item.files.push(('./js/app/' + jsString));
+                dictionary.push(item);
+            });
+            $ocLazyLoadProvider.config({
+                modules: dictionary
+            });
+            init();
+        }
+
+        function init() {
+            $stateProvider
+                .state('welcome', {
+                    url: '/welcome',
+                    templateUrl: 'WEB/bar/nav.html',
+                    // templateUrl: 'WEB/bar/nav2.html',
+                    resolve: {
+                        store: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('welcome')
+                        }]
+                    }
+                })
+                .state('welcome.welcome', {
+                    url: '/welcome',
+                    templateUrl: 'WEB/app/welcome/welcome.html',
+                    controller: 'welcome.welcomeController'
+                })
+                .state('angularTool', {
+                    url: '/angularTool',
+                    templateUrl: 'WEB/bar/nav.html',
+                    // templateUrl: 'WEB/bar/nav2.html',
+                    resolve: {
+                        store: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('angularTool')
+                        }]
+                    }
+                })
+                .state('angularTool.tinymce', {
+                    url: '/tinymce',
+                    templateUrl: 'WEB/app/angularTool/tinymce.html',
+                    controller: 'angularTool.tinymceController'
+                })
+                .state('angularTool.modal', {
+                    url: '/modal',
+                    templateUrl: 'WEB/app/angularTool/modal.html',
+                    controller: 'angularTool.modalController'
+                })
+                .state('angularTool.notification', {
+                    url: '/notification',
+                    templateUrl: 'WEB/app/angularTool/notification.html',
+                    controller: 'angularTool.notificationController'
+                })
+                .state('angularTool.drag', {
+                    url: '/drag',
+                    templateUrl: 'WEB/app/angularTool/drag.html',
+                    controller: 'angularTool.dragController'
+                })
+                .state('angularTool.cropper', {
+                    url: '/cropper',
+                    templateUrl: 'WEB/app/angularTool/cropper.html',
+                    controller: 'angularTool.cropperController'
+                })
+                .state('angularTool.upload', {
+                    url: '/upload',
+                    templateUrl: 'WEB/app/angularTool/upload.html',
+                    controller: 'angularTool.uploadController'
+                })
+                .state('angularTool.time', {
+                    url: '/time',
+                    templateUrl: 'WEB/app/angularTool/time.html',
+                    controller: 'angularTool.timeController'
+                })
+                /*
+                * 用户信息
+                * */
+                .state('user', {
+                    url: '/user',
+                    templateUrl: 'WEB/bar/nav.html',
+                    // templateUrl: 'WEB/bar/nav2.html',
+                    resolve: {
+                        store: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('user')
+                        }]
+                    }
+                })
+                .state('user.list', {
+                    url: '/list',
+                    templateUrl: 'WEB/app/user/list.html',
+                    controller: 'user.listController'
+                })
+        }
+
+
+    }
+
+    function configSce($locationProvider) {
+        $locationProvider.hashPrefix(''); //去掉angular-ui-router新版本里的!
+        //$locationProvider.html5Mode(true);
+    }
+
+    function runCore($rootScope, $state, $ocLazyLoad, Core) {
+        $rootScope.$state = $state;
+    }
+})();
+(function () {
+    angular
+        .module('app')
+        .controller('dialog.confirm', ['$scope', 'Core', '$uibModalInstance','params',HomeController]);
+
+    function HomeController($scope, Core, $uibModalInstance,params){
+
+        var context = $scope;
+
+        context.onClickOk = onClickOk;
+        context.onClickCancel= onClickCancel;
+
+        init();
+        function init() {
+            context.params = params;
+            context.params.header = context.params.header || '确认框';
+            // context.loading = true;
+        }
+
+        function onClickOk() {
+            $uibModalInstance.close('确认');
+        }
+
+        function onClickCancel() {
+            $uibModalInstance.dismiss('取消');
+        }
+    }
+}());
