@@ -246,10 +246,14 @@
 								$helper[0].style[prefix + 'transition'] = 'all ' + duration + 'ms ease';
 						});
 						setTimeout(afterRevert, duration);
-						$helper.css({
-							'top': placeholderRect.top + document.body.scrollTop + 'px',
-							'left': placeholderRect.left + document.body.scrollLeft + 'px'
-						});
+						// $helper.css({
+						// 	'top': placeholderRect.top + document.body.scrollTop + 'px',
+						// 	'left': placeholderRect.left + document.body.scrollLeft + 'px'
+						// });
+                        $helper.css({
+                            'top': placeholderRect.top + 'px',
+                            'left': placeholderRect.left +'px'
+                        });
 					}
 					else
 						afterRevert();
@@ -406,6 +410,9 @@
 				var moveExecuted;
 
 				function onMousedown(e){
+                    if($parse($attrs.svStop)($scope)) {//添加暂停
+                        return;
+                    }
 					touchFix(e);
 
 					if($controllers[1].sortingInProgress()) return;
@@ -463,6 +470,7 @@
 							if(targetLeft + helperRect.width > containmentRect.left + body.scrollLeft + containmentRect.width) // right boundary
 								targetLeft = containmentRect.left + body.scrollLeft + containmentRect.width - helperRect.width;
 						}
+						console.log("释放");
 						this.style.left = targetLeft - body.scrollLeft + 'px';
 						this.style.top = targetTop - body.scrollTop + 'px';
 					};
