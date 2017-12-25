@@ -1,0 +1,9 @@
+a:focus,a:hover,a:link{background: none;-webkit-touch-callout: none;}
+
+.tintmceDefault{padding: 0 10px;margin-top: 20px;color: #666;font-size: 14px;line-height: 1.5em;}
+.tintmceDefault a{text-decoration: none;color: #116fc3;-webkit-touch-callout: none;}
+.tintmceDefault .imgLay{width: 100%;margin-top: 15px;display: block;}
+.tintmceDefault p{word-break: break-all;margin-bottom: 10px;}
+.tintmceDefault p:last-child{margin-bottom: 0;}
+
+.tintmceDefaultTitle{font-size: 18px;color: #333;}

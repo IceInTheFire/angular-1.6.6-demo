@@ -1,0 +1,85 @@
+.insertimg{
+    width: 100%;
+    display: block;
+}
+.insertSmallimg{width: auto; display: inline; max-width: 100%; margin:auto;}
+
+
+.item-detailLink .items-holder2 *{
+    box-sizing: border-box;
+}
+
+.item-detailLink .items-holder2 {
+    display: block;
+    height: 5.125rem;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 0.1rem;
+    border-radius: 0.1rem;
+    margin-bottom: .4rem;
+}
+.item-detailLink .items-holder2 .content-left {
+    float: left;
+    width: 5.125rem;
+    height: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding: 0.5rem;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item-detailLink .items-holder2 .content-left .items-img {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+    margin: 0;
+    max-height: 100%;
+    max-width: 100%;
+}
+.item-detailLink .items-holder2 .content-holder {
+    display: block;
+    padding-top: 0.375rem;
+    float: left;
+    height: 100%;
+    width: calc(100% - 5.2rem);
+}
+.item-detailLink .items-holder2 .content-holder em {
+    font-style: normal;
+}
+.item-detailLink .items-holder2 .content-holder .item-title {
+    line-height: 1.35rem;
+    font-size: 0.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    color: #333;
+}
+.item-detailLink .items-holder2 .content-holder span.item-price {
+    display: block;
+    line-height: 1.4rem;
+}
+.item-detailLink .items-holder2 .content-holder span.item-price .item-current-price {
+    font-size: 0.8rem;
+    color: #DD001F;
+}
+.item-detailLink .items-holder2 .content-holder span.item-price .item-origin-price {
+    font-size: 0.6rem;
+    color: #999;
+    margin-left: 0.4rem;
+    text-decoration: line-through;
+}
+.item-detailLink .items-holder2 .content-holder .item-jump {
+    width: 4rem;
+    height: 1rem;
+    line-height: 1rem;
+    border-radius: 0.1rem;
+    -webkit-border-radius: 0.1rem;
+    color: #ffffff;
+    background: #DD001F;
+    font-size: 0.6rem;
+    text-align: center;
+    display: block;
+    margin-top: 0.275rem;
+}

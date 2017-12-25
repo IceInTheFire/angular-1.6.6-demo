@@ -5,10 +5,11 @@
         'app.core',
         'ngFileUpload',
         'ui.bootstrap',     //模态框
-        'angular-sortable-view'
+        'angular-sortable-view',
+        'ui.tinymce'
     ]);
 
-    app.controller('mainController', ['$scope', '$rootScope', '$state','Core', mainController]);
+    app.controller('mainController', ['$scope', '$rootScope', '$state', 'Core', mainController]);
 
     function mainController($scope, $rootScope, $state,Core) {
         // $scope.$state = Core.$state;
@@ -30,11 +31,6 @@
             // });
         }
 
-        // Core.Api.normalApi.Auth.getAdminUser().then(function(response) {
-        //     context.userData = response.data;
-        // },function(error){
-        //
-        // })
         var lazyLoad = {
             cache: {},
             deferred: function (self) {

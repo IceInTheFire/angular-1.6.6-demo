@@ -347,6 +347,8 @@ gulp.task("build-node-js", function() {
         './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
         './node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
         './node_modules/angular-local-storage/dist/angular-local-storage.min.js',   //本地缓存
+        // './node_modules/tinymce/tinymce.min.js',
+        // './node_modules/angular-ui-tinymce/dist/tinymce.min.js',
         // './node_modules/cropper/dist/cropper.min.js',
         // './node_modules/angular-sortable-view/angular-sortable-view.js',
         // './node_modules/video.js/dist/video.min.js',
@@ -375,6 +377,7 @@ gulp.task("build-lib-js", function() {
         // './lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.min.js',
         './lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js',
         './lib/angular-sortable-view/src/angular-sortable-view.js',
+        './lib/jquery.form.min.js', // jquery的ajaxsubmit 方法
         // 'js/**/**.js', '!js/app/**/**.js',
         // '!js/holder/**/**.js',
         // 'js/core/0.js',

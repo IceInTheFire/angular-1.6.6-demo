@@ -160,8 +160,8 @@
             },
             link: function (scope, elem, attrs) {
                 $q.all([
-                    $rootScope.lazyLoad.css('./node_modules/cropper/dist/cropper.min.css'),
-                    $rootScope.lazyLoad.js('./node_modules/cropper/dist/cropper.min.js'),
+                    $rootScope.lazyLoad.css('./lib/cropper/dist/cropper.min.css'),
+                    $rootScope.lazyLoad.js('./lib/cropper/dist/cropper.min.js'),
                 ]).then(function () {
                     var context = scope;
 

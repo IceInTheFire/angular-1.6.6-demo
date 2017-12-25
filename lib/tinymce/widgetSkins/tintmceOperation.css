@@ -1,0 +1,6 @@
+.tintmceOperation{padding: 0 10px;margin-top: 20px;border:1px solid #e8e8e8;border-left:none;border-right: none;}
+.tintmceOperation .tintmceOperationTit{font-size: 14px;}
+.tintmceOperation .tintmceRecommendMain{position:relative;height:60px;line-height:60px;overflow:hidden;display: block;font-size: 14px;text-decoration: none;}
+.tintmceOperation .tintmceRecommendMain .imgLay{width: 15px;height: 15px;display: inline-block;vertical-align: middle;}
+.tintmceOperation .tintmceRecommendMain .text{margin-left: 10px;display: inline-block;vertical-align: middle;color: #666;}
+.tintmceOperation .tintmceRecommendMain .rightIcon{position: absolute;right: 0;top: 20px;height: 20px;}

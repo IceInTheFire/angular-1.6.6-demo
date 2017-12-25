@@ -1,0 +1,9 @@
+.tinymceItemShopInfo{padding: 0 20px;margin-top: 10px;}
+.tinymceItemShopInfo .tinymceItemShopInfoTit{padding: 10px 0;font-size: 15px;margin: 0;}
+.tinymceItemShopInfo .tinymceItemShopInfoA{position:relative;display: block;overflow: hidden;color: #333;text-decoration: none;}
+.tinymceItemShopInfo .tinymceImglay{float:left;width:100px;height:100px;border:1px solid #f9f9f9;display: inline-block;text-align: center;}
+.tinymceItemShopInfo .tinymceImg{width: 100px;height: 100px;display: table-cell;vertical-align: middle;}
+.tinymceItemShopInfo .tinymceImglay img{max-width: 100%;max-height: 100%;}
+.tinymceItemShopInfo .tinymceItemShopInfoTitle{position:absolute;left:110px;top:0;padding-left:10px;height:42px;overflow:hidden;font-size: 14px;line-height: 22px;display: inline-block;word-break: break-all;font-weight: bold;}
+.tinymceItemShopInfo .tinymceItemShopInfoMain{margin-top:15px;font-size: 14px;color: #666;line-height: 24px;word-break: break-all;}
+.tinymceItemShopInfo .tinymceItemShopInfoMain p{margin: 0;}
