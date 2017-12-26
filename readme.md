@@ -13,6 +13,6 @@
 4、gulp release  切换到线上模式
 
 ## github案例网址
-## https://iceinthefire.github.io/angular-1.6.6-demo
+## http://yueqingfang.cn/markdown/demo/angular-1.6.6-demo
 
 
