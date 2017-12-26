@@ -16,5 +16,3 @@
 ## https://iceinthefire.github.io/angular-1.6.6-demo
 
 
-###### 正在神速更新中
-
