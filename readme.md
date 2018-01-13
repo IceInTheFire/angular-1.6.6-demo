@@ -3,6 +3,7 @@
 
 
 # gulp使用
+0、gulp serve    启动开发模式
 
 1、gulp build    切换到生产模式
 

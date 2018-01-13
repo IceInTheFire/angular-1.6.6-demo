@@ -2,6 +2,7 @@ const gulp = require("gulp");
 const concat = require("gulp-concat");  //文件合并
 const clean = require("gulp-clean");    //清除
 var watch = require('gulp-watch');
+var browserSync = require('browser-sync');
 /*
  * https://juejin.im/entry/55c8dbb160b22a3ebdf34d57
  * 用法
@@ -71,6 +72,7 @@ gulp.task('watch', function () {
         '!css/app/**/*.less',
         '!css/test/**.less'], ['build-core-css']);
     cssWatcher.on('change', function (event) {
+        browserSync.reload(event.path);
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 
@@ -462,6 +464,13 @@ gulp.task("build-lib-css", function() {
         .pipe(concat('lib.css'))
         .pipe(gulp.dest('css'));
 });
+gulp.task("serve",["watch"],function () {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+    });
+})
 /*
  * node.css core.css lib.css  打包 end
  * */
