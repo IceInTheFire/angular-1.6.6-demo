@@ -3,7 +3,7 @@
 
 
 # gulp使用
-0、gulp serve    启动开发模式
+0、gulp serve    启动开发模式(开启一个服务器，跟下面几种gulp无关,更多配置，期待大神配置的方便点)
 
 1、gulp build    切换到生产模式
 
